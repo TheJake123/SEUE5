@@ -5,6 +5,7 @@ public class Ball {
 	{
 		//Nein
 		//gleichzeitig am Ball^^
+		//fasdöfildjadsöfjkkffdijgfddöfgaiöerjgaökfldsfldfld
 	}
 	
 }
