@@ -3,7 +3,7 @@ public class Ball {
 
 	public Ball()
 	{
-		//muahahahahhah 
+		//muahahahahhaha
 		
 	} //end Ball
 	
