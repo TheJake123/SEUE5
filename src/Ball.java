@@ -3,8 +3,8 @@ public class Ball {
 
 	public Ball()
 	{
-		//muahahahahhahaha
+		//Nein
 		
-	} //end Ball
+	}
 	
 }
