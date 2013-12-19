@@ -1,6 +1,6 @@
 
 public class GameObject {
-	private int x;
+	private int x = 10;
 	private int y;
 	
 }
