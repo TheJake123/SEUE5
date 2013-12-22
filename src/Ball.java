@@ -7,6 +7,7 @@ public class Ball {
 		//gleichzeitig am Ball^^
 		//fasdöfildjadsöfjkkffdijgfddöfgaiöerjgaökfldsfldfld
 		//änderung neu
+		int lol = 5;
 	}
 	
 }
