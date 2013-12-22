@@ -6,7 +6,7 @@ public class Ball {
 		//Nein
 		//gleichzeitig am Ball^^
 		//fasdöfildjadsöfjkkffdijgfddöfgaiöerjgaökfldsfldfld
-		//änderung neu
+		//änderung neu test
 	}
 	
 }
