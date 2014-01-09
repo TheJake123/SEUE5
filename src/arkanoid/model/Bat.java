@@ -59,6 +59,6 @@ public class Bat extends GameObject implements Moveable, BallVisitor {
 	} // end move
 
 	public void visit(Ball b) {
-		b.setSpeedX = Math.round(Math.random()*2)-1;
+		b.setSpeedX() = Math.round(Math.random()*2)-1;
 	}
 } // end class Batt
