@@ -29,6 +29,7 @@ public class Ball extends GameObject implements Moveable, Visitable
 		this.speedX = speedX;
 		this.speedY = speedY;
 		this.maxX = fieldWidth;
+		this.maxY = fieldHeight;
 	} //end Ball
 	
 	/**
@@ -96,7 +97,7 @@ public class Ball extends GameObject implements Moveable, Visitable
 		return speedX;
 	}
 	/**
-	 * Akzeptanz der BallVisitor.
+	 * Akzeptanz des BallVisitor.
 	 */
 	public void accept(BallVisitor visitor)
 	{
