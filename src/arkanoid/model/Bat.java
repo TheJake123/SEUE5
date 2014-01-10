@@ -1,6 +1,6 @@
 package arkanoid.model;
 
-public class Bat extends GameObject implements Moveable, BallVisitor {
+class Bat extends GameObject implements Moveable, BallVisitor {
 	// width is just a relative size
 	private int width;
 	private int speedX;
@@ -59,6 +59,6 @@ public class Bat extends GameObject implements Moveable, BallVisitor {
 	} // end move
 
 	public void visit(Ball b) {
-		b.setSpeedX() = Math.round(Math.random()*2)-1;
+		b.setSpeedX((int)Math.random()*2-1);
 	}
 } // end class Batt

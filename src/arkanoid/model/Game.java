@@ -26,7 +26,7 @@ public class Game implements Runnable
 		{
 			try
 			{
-				bat.move();
+				currentLevel.step();
 				Thread.sleep(1000);
 
 			} catch(InterruptedException e)

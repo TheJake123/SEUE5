@@ -1,6 +1,6 @@
 package arkanoid.model;
 
-public class Ball extends GameObject implements Moveable
+class Ball extends GameObject implements Moveable
 {
 	private int speedX;
 	private int speedY;
@@ -16,5 +16,29 @@ public class Ball extends GameObject implements Moveable
 		
 		
 	} //end move
+
+	@Override
+	public int getSpeedX() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getSpeedY() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setSpeedX(int speedX) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSpeedY(int speedY) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 } //end class Ball

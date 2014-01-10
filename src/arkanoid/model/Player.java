@@ -3,8 +3,8 @@ package arkanoid.model;
 public class Player
 {
 	private final String name;
-	private int currentLevel;
-	private int currentScore;
+	private int levelNo;
+	private int score;
 	private int highScore;
 	private int lives;
 	
@@ -12,7 +12,7 @@ public class Player
 	{
 		this.name = name;
 		lives = 3;
-		currentScore = 0;
+		score = 0;
 		highScore = 0;
 		
 	} //end Player
@@ -23,19 +23,19 @@ public class Player
 		
 	} //end getName	
 	
-	public void setCurrentScore(int newCurrentScore)
+	protected void setScore(int newScore)
 	{
-		currentScore = newCurrentScore;
+		score = newScore;
 		
 	} //end setCurrentScore
 	
-	public int getCurrentScore()
+	public int getScore()
 	{
-		return currentScore;
+		return score;
 		
 	} //end getCurrentScore
 	
-	public void setHighScore(int newHighScore)
+	protected void setHighScore(int newHighScore)
 	{
 		highScore = newHighScore;
 		
@@ -47,7 +47,7 @@ public class Player
 		
 	} //end getHighScore
 	
-	public void setLives(int newLives)
+	protected void setLives(int newLives)
 	{
 		lives = newLives;
 		
@@ -59,15 +59,15 @@ public class Player
 		
 	} //end getLives
 	
-	public void setCurrentLevel(int currLevel)
+	protected void setCurrentLevel(int currLevel)
 	{
-		currentLevel = currLevel;
+		levelNo = currLevel;
 		
 	} //end setLives
 	
 	public int getCurrentLevel()
 	{
-		return currentLevel;
+		return levelNo;
 		
 	} //end getLives
 	
