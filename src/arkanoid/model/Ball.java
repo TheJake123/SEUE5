@@ -37,16 +37,29 @@ public class Ball extends GameObject implements Moveable, Visitable
 	@Override
 	public void move() {
 		if (posX + speedX > maxX || posX + speedX < 0)
+		{
 			speedX *= -1;
+			System.out.println("Ball trifft auf Begrenzung.");
+		}
+		
 		posX = posX + speedX;
 		
 		if (posY + speedY > maxY || posY + speedY < 0)
+		{
+			if(posY + speedY < 0)
+			{
+				System.out.println("Ball trifft auf unteren Spielfeldrand. -1 Leben.");
+			}
+			else
+			{
+				System.out.println("Ball trifft auf obere Begrenzung.");
+			}
 			speedY *= -1;
-		posY = posY + speedY;
+		}
 		
-		//if (posY = )
+		posY = posY + speedY;
 
-		System.out.println("Schläger von (" + (posX - speedX) + "," + (posY - speedY)
+		System.out.println("Ball von (" + (posX - speedX) + "," + (posY - speedY)
 				+ ") nach (" + posX + "," + posY + ")");
 
 	} // end move

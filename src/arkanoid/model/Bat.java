@@ -100,6 +100,7 @@ public class Bat extends GameObject implements Moveable, BallVisitor {
 			b.setSpeedX((int)(Math.round(Math.random()*2)-1));
 			b.setSpeedY(b.getSpeedY()*-1); 
 			this.setBallHits((ballHits+1));
+			System.out.println("Ball trifft Schläger.");
 		}
 	}
 
