@@ -1,44 +1,108 @@
 package arkanoid.model;
 
-class Ball extends GameObject implements Moveable
+/**
+ * Die Klasse Ball repräsentiert den Ball im Spiel, welcher automatisch zwischen dem rechten und linken
+ * Spielfeldrand pendelt.
+ */
+public class Ball extends GameObject implements Moveable, Visitable
 {
 	private int speedX;
 	private int speedY;
-	public Ball(int x, int y)
+	private int maxX;//Wert des rechtesten Punkt im Spielfeld
+	private int maxY;//Wert des vertikal höchsten Punkt im Spielfeld
+
+
+	/**
+	 * Ball-Konstruktor
+	 * 
+	 * @param x x-Position des Schlägers
+	 * @param y y-Position des Schlägers
+	 * @param fieldWidth Breite des Feldes
+	 * @param fieldHeight Höhe des Feldes
+	 * @param speedY Vertikale Bewegungsrichtung des Schlägers
+	 * @param speedX Horizontale Bewegungsrichtung des Schlägers
+	 * 
+	 */
+	public Ball(int x, int y, int fieldWidth, int fieldHeight, int speedY, int speedX)
 	{
 		super(x, y);
-		speedY = 1;
+		this.speedX = speedX;
+		this.speedY = speedY;
+		this.maxX = fieldWidth;
 	} //end Ball
 	
+	/**
+	 * Die Methode führt die Richtungsänderung des Schlägers in horizontaler und vertikaler Ebene durch.
+	 */
 	@Override
-	public void move()
-	{
+	public void move() {
+		if (posX + speedX > maxX || posX + speedX < 0)
+		{
+			speedX *= -1;
+			System.out.println("Ball trifft auf Begrenzung.");
+		}
 		
+		posX = posX + speedX;
 		
-	} //end move
+		if (posY + speedY > maxY || posY + speedY < 0)
+		{
+			if(posY + speedY < 0)
+			{
+				System.out.println("Ball trifft auf unteren Spielfeldrand. -1 Leben.");
+			}
+			else
+			{
+				System.out.println("Ball trifft auf obere Begrenzung.");
+			}
+			speedY *= -1;
+		}
+		
+		posY = posY + speedY;
 
-	@Override
-	public int getSpeedX() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+		System.out.println("Ball von (" + (posX - speedX) + "," + (posY - speedY)
+				+ ") nach (" + posX + "," + posY + ")");
 
-	@Override
-	public int getSpeedY() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
+	} // end move
+	/**
+	 * Die Methode setzt die aktuelle Geschwindigkeit in horizontaler Richtung.
+	 * 
+	 * @return speedX Aktuelle Geschwindigkeit in horizontaler Richtung.
+	 */
 	public void setSpeedX(int speedX) {
-		// TODO Auto-generated method stub
-		
+		this.speedX = speedX;
+	}
+	/**
+	 * Die Methode setzt die aktuelle Geschwindigkeit in vertikaler Richtung.
+	 * 
+	 * @return speedY Aktuelle Geschwindigkeit in horizontaler Richtung.
+	 */
+	public void setSpeedY(int speedY) {
+		this.speedY = speedY;
+	}
+	/**
+	 * Die Methode gibt die aktuelle Geschwindigkeit in vertikaler Richtung zurück.
+	 * 
+	 * @return speedY Aktuelle Geschwindigkeit in horizontaler Richtung.
+	 */
+	public int getSpeedY() {
+		return speedY;
+	}
+	/**
+	 * Die Methode gibt die aktuelle Geschwindigkeit in horizontaler Richtung zurück.
+	 * 
+	 * @return speedX Aktuelle Geschwindigkeit in horizontaler Richtung.
+	 */
+	public int getSpeedX() {
+		return speedX;
+	}
+	/**
+	 * Akzeptanz der BallVisitor.
+	 */
+	public void accept(BallVisitor visitor)
+	{
+		visitor.visit(this);
 	}
 
-	@Override
-	public void setSpeedY(int speedY) {
-		// TODO Auto-generated method stub
-		
-	}
+
 	
 } //end class Ball
