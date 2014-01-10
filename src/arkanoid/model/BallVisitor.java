@@ -1,7 +1,5 @@
 package arkanoid.model;
 
-interface BallVisitor {
-
 public interface BallVisitor {
 	/**
 	 * Wenn ein Objekt mit dem Ball in Berührung kommt
