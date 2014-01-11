@@ -91,8 +91,10 @@ public class Bat extends GameObject implements Moveable, BallVisitor {
 
 	} // end move
 	/**
-	 * Visitor Implementierung, welche eine Richtungsänderung des Balles und die erhöhung der Ballberürhrungen
-	 * erhöht.
+	 * Visitor Implementierung, welche eine Richtungsänderung des Balles und die Erhöhung der Ballberührungen
+	 * erwirkt.
+	 * 
+	 * @param b Ball der den Schläger besucht.
 	 */
 	public void visit(Ball b) {
 		if(b.getPosX() == this.posX && b.getPosY() == this.posY)

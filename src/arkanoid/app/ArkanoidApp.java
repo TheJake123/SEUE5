@@ -28,12 +28,27 @@ public class ArkanoidApp {
 
 	private GameObject[][] createField(int width, int height) {
 		GameObject field[][] = new GameObject[width][height];
-
+		double rand = 0.0;
 		// Create Bricks
+		BrickFactory factory = new BrickFactory();
 		for (int x = 0; x < width; x++)
 			for (int y = 0; y < height; y++)
+			{
 				if (Math.random() < 1/width/height)
-					field[x][y] = new Brick(x, y);
+					rand = Math.random();
+					if(rand < 0.7)
+					{
+						field[x][y] = factory.getBrick("SingleBrick", x, y);
+					}
+					else if(rand < 0.9)
+					{
+						field[x][y] = factory.getBrick("MultiBrick", x, y);
+					}
+					else
+					{
+						field[x][y] = factory.getBrick("SpecialBrick", x, y);
+					}
+			}
 		return field;
 	} // end createField
 } // end class ArkanoidApp
