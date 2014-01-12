@@ -19,8 +19,8 @@ public class Bat extends GameObject implements Moveable {
 	 *            Horizontale Bewegungsrichtung des Schlägers
 	 * 
 	 */
-	public Bat(int x, int y, int speedX) {
-		super(x, y);
+	public Bat(int x, int y, int speedX, Level level) {
+		super(x, y, level);
 		this.speedX = speedX;
 		ballHits = 0;
 
@@ -101,7 +101,9 @@ public class Bat extends GameObject implements Moveable {
 
 	} // end move
 
-	
+	public String getName() {
+		return "Schläger";
+	}
 	/**
 	 * Visitor Implementierung, welche eine Richtungsänderung des Balles und die
 	 * Anzahl der Ballberürhrungen erhöht.

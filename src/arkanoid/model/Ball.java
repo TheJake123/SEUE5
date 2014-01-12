@@ -25,8 +25,8 @@ public class Ball extends GameObject implements Moveable {
 	 *            Horizontale Bewegungsrichtung des Schlägers
 	 * 
 	 */
-	public Ball(int x, int y, int speedY, int speedX) {
-		super(x, y);
+	public Ball(int x, int y, int speedX, int speedY, Level level) {
+		super(x, y, level);
 		setSpeedX(speedX);
 		setSpeedY(speedY);
 	} // end Ball
@@ -39,6 +39,9 @@ public class Ball extends GameObject implements Moveable {
 	public void move() {
 		setPosX(getPosX() + getSpeedX());
 		setPosY(getPosY() + getSpeedY());
+		System.out.println("Ball von (" + (getPosX() - getSpeedX()) + ","
+				+ (getPosY() - getSpeedY()) + ") nach (" + getPosX() + ","
+				+ getPosY() + ")");
 	} // end move
 
 	/**
@@ -82,9 +85,14 @@ public class Ball extends GameObject implements Moveable {
 	@Override
 	public void visit(GameObject other) {
 		if (other instanceof Brick) {
+			setPosX(getPosX() - getSpeedX());
+			setPosY(getPosY() - getSpeedY());
 			setSpeedX(getSpeedX() * -1);
 			setSpeedY(getSpeedY() * -1);
 		}
+	}
+	public String getName() {
+		return "Ball";
 	}
 
 } // end class Ball

@@ -5,12 +5,13 @@ public abstract class GameObject implements Visitor, Visitable {
 	private int posY;
 	private Level level;
 	protected java.util.Random Random = new java.util.Random();
-	public GameObject(int x, int y) {
+	public GameObject(int x, int y, Level level) {
 		posX = x;
 		posY = y;
-
+		this.level = level;
 	} // end GameObject
 
+	public abstract String getName();
 	public int getPosX() {
 		return posX;
 
@@ -35,9 +36,8 @@ public abstract class GameObject implements Visitor, Visitable {
 	public void accept(Visitor v) {
 		v.visit(this);
 	}
-	
-	protected void setLevel(Level l) {
-		this.level = l;
+	protected void setLevel(Level level) {
+		this.level = level;
 	}
 	protected Level getLevel() {
 		return level;

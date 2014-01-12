@@ -1,46 +1,48 @@
 package arkanoid.model;
 
-public class PowerUp extends GameObject implements Moveable, WallVisitor {
+public abstract class PowerUp extends GameObject implements Moveable {
+	private int speedY;
+	private Player player;
 
-	public PowerUp(int x, int y) {
-		super(x, y);
-		// TODO Auto-generated constructor stub
+	public PowerUp(int x, int y, int speedY, Level level, Player player) {
+		super(x, y, level);
+		this.speedY = speedY;
+		this.player = player;
 	}
 
 	@Override
-	public void visit(Wall other) {
-		// TODO Auto-generated method stub
-
+	public void visit(GameObject other) {
+		if (other instanceof Wall) {
+			getLevel().removeObject(this);
+		} else if (other instanceof Bat) {
+			player.setScore(player.getScore() + 15);
+			System.out.println("Score wird um 15 auf " + player.getScore()
+					+ " erhöht");
+		}
 	}
 
 	@Override
 	public void move() {
-		// TODO Auto-generated method stub
-
+		setPosY(getPosY() + getSpeedY());
 	}
 
 	@Override
-	public int getSpeedX() {
-		// TODO Auto-generated method stub
-		return 0;
+	final public int getSpeedX() {
+		return 0; // Keine horizontale Bewegung
 	}
 
 	@Override
 	public int getSpeedY() {
-		// TODO Auto-generated method stub
-		return 0;
+		return speedY;
 	}
 
 	@Override
-	public void setSpeedX(int speedX) {
-		// TODO Auto-generated method stub
-
+	final public void setSpeedX(int speedX) {
 	}
 
 	@Override
 	public void setSpeedY(int speedY) {
-		// TODO Auto-generated method stub
-
+		this.speedY = speedY;
 	}
 
 }

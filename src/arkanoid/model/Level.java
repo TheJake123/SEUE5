@@ -11,9 +11,20 @@ public class Level {
 	private int lvlNr;
 	private GameObject[][] gameboard;
 	private ArrayList<Moveable> moveables = new ArrayList<Moveable>();
-	private ArrayList<Ball> balls = new ArrayList<Ball>();
+	private Player player;
 	private Bat bat = null;
-	private ArrayList<PowerUp> powerups = new ArrayList<PowerUp>();
+
+	private int height;
+
+	public int getHeight() {
+		return height;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	private int width;
 	java.util.Random Random = new java.util.Random();
 
 	/**
@@ -47,9 +58,10 @@ public class Level {
 	 *            Die Nummer des Levels
 	 * @param gameboard
 	 */
-	public Level(int nr, GameObject[][] gameboard) {
+	public Level(int nr, GameObject[][] gameboard, Player player) {
 		lvlNr = nr;
 		this.bricksCount = prepareGameboard(gameboard);
+		this.player = player;
 	} // end Level
 
 	/**
@@ -77,40 +89,39 @@ public class Level {
 		if (board == null) {
 			throw new NullPointerException("No board to prepare");
 		}
-		int height = board[0].length + 11;
-		int width = board.length + 2;
+		height = board[0].length + 11;
+		width = board.length + 2;
 		gameboard = new GameObject[width][height];
 
 		// Create Walls
 		// south-wall
 		for (int x = 0; x < width; x++)
-			gameboard[x][0] = new Wall(x, 0, width, height);
+			gameboard[x][0] = new Wall(x, 0, this);
 
 		// north-wall
 		for (int x = 0; x < width; x++)
-			gameboard[x][height - 1] = new Wall(x, height - 1, width, height);
+			gameboard[x][height - 1] = new Wall(x, height - 1, this);
 
 		// east-wall
 		for (int y = 0; y < height; y++)
-			gameboard[0][y] = new Wall(0, y, width, height);
+			gameboard[0][y] = new Wall(0, y, this);
 
 		// west-wall
 		for (int y = 0; y < height; y++)
-			gameboard[width - 1][y] = new Wall(width - 1, y, width, height);
+			gameboard[width - 1][y] = new Wall(width - 1, y, this);
 		int count = 0;
 		for (int x = 0; x < board.length; x++) {
 			for (int y = 0; y < board[0].length; y++)
 				if (board[x][y] instanceof Brick) {
 					count++;
 					gameboard[x + 1][y + 1] = board[x][y];
+					board[x][y].setLevel(this);
 				}
 
 		}
-		bat = new Bat(width / 2, height - 2, 1);
-		Ball ball = new Ball(width / 2, height - 3, Random.nextInt(3) - 1, -1);
-		addObject(bat);
-		addObject(ball);
-		balls.add(ball);
+		addObject(new Bat(width / 2, height - 2, 1, this));
+		addObject(new Ball(width / 2, height - 3, Random.nextInt(3) - 1, -1,
+				this));
 		return count;
 	}
 
@@ -118,16 +129,13 @@ public class Level {
 		int x = o.getPosX();
 		int y = o.getPosY();
 		if (gameboard[x][y] == null) {
-			if (o instanceof Ball) {
-				balls.add((Ball) o);
+			if (o instanceof Ball || o instanceof PowerUp) {
 			} else if (o instanceof Bat) {
 				if (bat != null) {
 					gameboard[bat.getPosX()][bat.getPosY()] = null;
 					bat.setLevel(null);
 				}
 				bat = (Bat) o;
-			} else if (o instanceof PowerUp) {
-				powerups.add((PowerUp) o);
 			} else {
 				return;
 			}
@@ -158,28 +166,63 @@ public class Level {
 		}
 	}
 
-	protected void remove(GameObject o) {
+	protected void removeObject(GameObject o) {
 		int x = o.getPosX();
 		int y = o.getPosY();
 		if (gameboard[x][y] == o) {
 			gameboard[x][y] = null;
 			o.setLevel(null);
+			if (o instanceof Moveable) {
+				moveables.remove(o);
+			}
+			if (o instanceof Brick) {
+				bricksCount--;
+			}
 		}
 	}
 
 	public void step() {
+		if (player.getScore() > 0) {
+			player.setScore(player.getScore() - 1);
+			System.out.println("Score wird um 1 auf " + player.getScore()
+					+ " verringert");
+		}
 		for (Moveable m : moveables) {
 			m.move();
 		}
-		for (Ball b : balls) {
-			int x = b.getPosX();
-			int y = b.getPosY();
-			GameObject other = gameboard[x][y];
-			if (other.getPosX() == x && other.getPosY() == y) {
-				b.accept(other);
-				other.accept(b);
+		for (Moveable m : moveables) {
+			GameObject o = (GameObject) m;
+			GameObject other = gameboard[o.getPosX()][o.getPosY()];
+			while (other != null && other.getPosX() == o.getPosX()
+					&& other.getPosY() == o.getPosY()) {
+				o.accept(other);
+				other.accept(o);
+				System.out.println(o.getName() + " kollidiert mit "
+						+ other.getName() + " an der Stelle (" + o.getPosX()
+						+ "," + o.getPosY() + ")");
 			}
 		}
-		
+		for (int y = 0; y < gameboard[0].length; y++) {
+			for (int x = 0; x < gameboard.length; x++) {
+				GameObject o = gameboard[x][y];
+				if (o != null && (o.getPosX() != x || o.getPosY() != y)) {
+					if (gameboard[o.getPosX()][o.getPosY()] == null) {
+						gameboard[o.getPosX()][o.getPosY()] = o;
+						gameboard[x][y] = null;
+					} else {
+						o.setPosX(x);
+						o.setPosY(y);
+					}
+				}
+			}
+		}
+		if (bricksCount <= 0) {
+
+			player.setScore(player.getScore() + 50);
+			System.out
+					.println("Letzten Brick abgeschossen. Score wird um 50 auf "
+							+ player.getScore() + " erhöht");
+		}
+		// displayBoard();
 	}
 } // end class Level
