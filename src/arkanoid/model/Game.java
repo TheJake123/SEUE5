@@ -4,39 +4,32 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-public class Game implements Runnable
-{
+public class Game implements Runnable {
 	private ArrayList<Level> levels;
 	Iterator<Level> levelIterator;
 	Level currentLevel;
-	
-	public Game(Player player, ArrayList<Level> levels)
-	{
-		this.levels = levels;		
-		levelIterator = levels.iterator();
-		currentLevel = levelIterator.next();
-	} //end Gameboard
-	
-	
-	
-	@Override
-	public void run()
-	{
-		while(!Thread.interrupted())
-		{
-			try
-			{
-				currentLevel.step();
-				Thread.sleep(1000);
+	Player player;
 
-			} catch(InterruptedException e)
-			{
-				Thread.currentThread().interrupt();
-				
-			} //end try/catch
-			
-		} //end while
-		
-	} //end run
-	
-} //end class Gameboard
+	public Game(Player player, ArrayList<Level> levels) {
+		this.player = player;
+		this.levels = levels;
+		levelIterator = levels.iterator();
+	} // end Gameboard
+
+	@Override
+	public void run() {
+		while (levelIterator.hasNext()) {
+			player.setScore(0);
+			currentLevel = levelIterator.next();
+			while (!currentLevel.isOver()) {
+				try {
+					currentLevel.step();
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					Thread.currentThread().interrupt();
+				} // end try/catch
+			} // end while
+		}
+	} // end run
+
+} // end class Gameboard

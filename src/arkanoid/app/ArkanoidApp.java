@@ -32,8 +32,8 @@ public class ArkanoidApp {
 		// Create Bricks
 		for (int x = 0; x < width; x++)
 			for (int y = 0; y < height; y++)
-				if (Math.random() < 1/width/height)
-					field[x][y] = new Brick(x, y);
+				if (Math.random() < 1 / width / height)
+					field[x][y] = new Brick(x, y, player);
 		return field;
 	} // end createField
 } // end class ArkanoidApp
