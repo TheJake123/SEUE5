@@ -3,8 +3,10 @@ package arkanoid.model;
 class Wall extends GameObject {
 	private final int[][] possibleReflections;
 	java.util.Random Random = new java.util.Random();
-	public Wall(int x, int y, Level level) {
+	private Player player;
+	public Wall(int x, int y, Level level, Player player) {
 		super(x, y, level);
+		this.player = player;
 		int boardWidth = level.getWidth();
 		int boardHeight = level.getHeight();
 		if (x == boardWidth - 1 && y == boardHeight - 1) { //SE Corner
@@ -67,6 +69,10 @@ class Wall extends GameObject {
 			b.setSpeedY(possibleReflections[index][1]);
 			b.setPosX(getPosX() + possibleReflections[index][0]);
 			b.setPosY(getPosY() + possibleReflections[index][1]);
+			if (getPosY() == getLevel().getHeight()-1) {
+				player.setLives(player.getLives()-1);
+				System.out.println("Ball berührt unteren Spielfeldrand, es wird ein Leben abgezogen. Neue Leben: " + player.getLives());
+			}
 		} else if (other instanceof Bat) {
 			other.setPosX(getPosX()+possibleReflections[0][0]);
 		}

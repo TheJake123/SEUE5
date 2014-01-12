@@ -48,7 +48,7 @@ public class Level {
 	 * @return <code>true</code>, wenn das Spiel vorbei ist
 	 */
 	protected boolean isOver() {
-		return bricksCount <= 0;
+		return bricksCount <= 0 || player.getLives() <= 0;
 	}
 
 	/**
@@ -60,8 +60,8 @@ public class Level {
 	 */
 	public Level(int nr, GameObject[][] gameboard, Player player) {
 		lvlNr = nr;
-		this.bricksCount = prepareGameboard(gameboard);
 		this.player = player;
+		this.bricksCount = prepareGameboard(gameboard);
 	} // end Level
 
 	/**
@@ -96,19 +96,19 @@ public class Level {
 		// Create Walls
 		// south-wall
 		for (int x = 0; x < width; x++)
-			gameboard[x][0] = new Wall(x, 0, this);
+			gameboard[x][0] = new Wall(x, 0, this, player);
 
 		// north-wall
 		for (int x = 0; x < width; x++)
-			gameboard[x][height - 1] = new Wall(x, height - 1, this);
+			gameboard[x][height - 1] = new Wall(x, height - 1, this, player);
 
 		// east-wall
 		for (int y = 0; y < height; y++)
-			gameboard[0][y] = new Wall(0, y, this);
+			gameboard[0][y] = new Wall(0, y, this, player);
 
 		// west-wall
 		for (int y = 0; y < height; y++)
-			gameboard[width - 1][y] = new Wall(width - 1, y, this);
+			gameboard[width - 1][y] = new Wall(width - 1, y, this, player);
 		int count = 0;
 		for (int x = 0; x < board.length; x++) {
 			for (int y = 0; y < board[0].length; y++)
