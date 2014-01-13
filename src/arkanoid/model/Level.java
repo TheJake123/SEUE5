@@ -15,11 +15,19 @@ public class Level {
 	private Bat bat = null;
 
 	private int height;
-
+	/**
+	 * Ermittelt, wie hoch das Spielfeld ist
+	 * 
+	 * @return height Höhe des Spielfeldes
+	 */
 	public int getHeight() {
 		return height;
 	}
-
+	/**
+	 * Ermittelt, wie breit das Spielfeld ist.
+	 * 
+	 * @return width Breite des Spielfeldes
+	 */
 	public int getWidth() {
 		return width;
 	}
@@ -57,6 +65,7 @@ public class Level {
 	 * @param nr
 	 *            Die Nummer des Levels
 	 * @param gameboard
+	 * 			  Das Feld mit den Spielobjekten
 	 */
 	public Level(int nr, GameObject[][] gameboard, Player player) {
 		lvlNr = nr;
@@ -125,6 +134,11 @@ public class Level {
 		return count;
 	}
 
+	/**
+	 * Fügt dem Level ein neues Spielobjekt hinzu.
+	 * 
+	 * @param o Spielobjekt das dem Level hinzugefügt werden soll.
+	 */
 	protected void addObject(GameObject o) {
 		int x = o.getPosX();
 		int y = o.getPosY();
@@ -145,7 +159,11 @@ public class Level {
 			o.setLevel(this);
 		}
 	}
-
+	
+	/**
+	 * Schreibt das Spielfeld grafisch in die Konsole.
+	 * 
+	 */
 	public void displayBoard() {
 		System.out.println("Showing board with dimensions "
 				+ gameboard[0].length + "*" + gameboard.length);
@@ -166,6 +184,11 @@ public class Level {
 		}
 	}
 
+	/**
+	 * Entfernt dem Level ein Spielobjekt.
+	 * 
+	 * @param o Spielobjekt das aus dem Level gelöscht werden soll.
+	 */
 	protected void removeObject(GameObject o) {
 		int x = o.getPosX();
 		int y = o.getPosY();
@@ -181,6 +204,10 @@ public class Level {
 		}
 	}
 
+	/**
+	 * Die Methode simuliert einen nächsten Schritt innerhalb eines Spieles, wodurch alle bewegbaren Spielobjekte
+	 * die Position verändern und der Score gegebenfalls erhöht wird.
+	 */
 	public void step() {
 		if (player.getScore() > 0) {
 			player.setScore(player.getScore() - 1);

@@ -1,5 +1,8 @@
 package arkanoid.model;
-
+/**
+ * Die Klasse BatSpeedPowerUp repräsentiert im Spiel ein PowerUp, welches den Schläger für eine kurze Zeit
+ * beschleunigt.
+ */
 public class BatSpeedPowerUp extends PowerUp {
 	private static class BatSpeedThread extends Thread {
 		private boolean inEffect = false;
@@ -37,12 +40,31 @@ public class BatSpeedPowerUp extends PowerUp {
 		}
 	};
 	private static BatSpeedThread t = new BatSpeedThread();
+	/**
+	 * BatSpeedPowerUp-Konstruktor, der für die Auswirkungen des PowerUp's einen Thread startet.
+	 * 
+	 * @param x
+	 *            x-Position des PowerUp's.
+	 * @param y
+	 *            y-Position des PowerUp's.
+	 * @param level
+	 *            Aktuelle Level des Spiels.
+	 * @param player
+	 *            Aktuelle Spieler des Spiels.
+	 * 
+	 */
 	public BatSpeedPowerUp(int x, int y, Level level, Player player) {
 		super(x, y, 1, level, player);
 		if (!t.isAlive()) 
 			t.start();
 	}
-
+	
+	/**
+	 * Visitor Implementierung, welche bei einer Kollidierung mit dem Schläger die Auswirkungen für diesen
+	 * startet.
+	 * 
+	 * @param other Spielobjekt mit dem das PowerUp kollidiert
+	 */
 	public void visit(GameObject other) {
 		super.visit(other);
 		if (other instanceof Bat) {
@@ -52,7 +74,11 @@ public class BatSpeedPowerUp extends PowerUp {
 			getLevel().removeObject(this);
 		}
 	}
-
+	/**
+	 * Rückgabe des Namens der Spielfigur.
+	 * 
+	 * @return String "BatSpeedPowerUp"
+	 */
 	@Override
 	public String getName() {
 		return "BatSpeedPowerUp";

@@ -6,10 +6,27 @@ package arkanoid.model;
 public class TripleBrick extends Brick {
 	
 	private int lives = 3;
-
+	/**
+	 * TripleBrick-Konstruktor
+	 * 
+	 * @param x
+	 *            x-Position des Ziegels
+	 * @param y
+	 *            y-Position des Ziegels
+	 * @param player
+	 *            Aktuelle Spieler des Spieles
+	 * @param level
+	 *            Aktuelle Level des Spieles
+	 * 
+	 */
 	public TripleBrick(int x, int y, Player player, Level level) {
 		super(x, y, player, level);
 	}
+	/**
+	 * Visitor Implementierung, welche das Spielobjekt nach dem letzten Leben löscht.
+	 * 
+	 * @param other Spielobjekt das den Ziegel besucht.
+	 */
 	@Override
 	public void visit(GameObject other) {
 		super.visit(other);
@@ -19,6 +36,11 @@ public class TripleBrick extends Brick {
 				getLevel().removeObject(this);
 		}
 	}
+	/**
+	 * Rückgabe der Punkte des Ziegels und für einen Treffer.
+	 * 
+	 * @return brickPoints Punkte für den Ziegel
+	 */
 	@Override
 	public int getPoints() {
 		if(lives <= 0)
@@ -30,6 +52,11 @@ public class TripleBrick extends Brick {
 			return 10; //+10 Punkte für einen Treffer
 		}
 	}
+	/**
+	 * Rückgabe des Namens der Spielfigur.
+	 * 
+	 * @return String "Triple Brick"
+	 */
 	public String getName() {
 		return "Triple Brick";
 	}

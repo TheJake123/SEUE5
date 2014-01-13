@@ -10,8 +10,15 @@ public class SpecialBrick extends Brick {
 	/**
 	 * Spezialziegel Konstrukter, welcher Automatisch die Art des PowerUps auswählt.
 	 * 
-	 * @param x x-Position des Ziegels
-	 * @param y y-Position des Ziegels
+	 * @param x
+	 *            x-Position des Ziegels
+	 * @param y
+	 *            y-Position des Ziegels
+	 * @param player
+	 *            Aktuelle Spieler des Spieles
+	 * @param level
+	 *            Aktuelle Level des Spieles
+	 * 
 	 */
 	public SpecialBrick(int x, int y, Player player, Level level) {
 		super(x, y, player, level);
@@ -23,8 +30,7 @@ public class SpecialBrick extends Brick {
 		else if(random < 0.6)
 		{
 			powerUp = new BatSpeedPowerUp(getPosX(), getPosY(), level, player);
-		}
-		else if(random < 0.8)
+		}		else if(random < 0.8)
 		{
 			powerUp = new BatSpeedPowerUp(getPosX(), getPosY(), level, player);
 		}
@@ -42,6 +48,11 @@ public class SpecialBrick extends Brick {
 	public PowerUp getPowerUp() {
 		return powerUp;
 	}
+	/**
+	 * Visitor Implementierung, welche das Spielobjekt löscht und ein PowerUp dem Level hinzfügt.
+	 * 
+	 * @param other Spielobjekt das den Ziegel besucht.
+	 */
 	@Override
 	public void visit(GameObject other) {
 		super.visit(other);
@@ -50,10 +61,20 @@ public class SpecialBrick extends Brick {
 			getLevel().removeObject(this);
 		}
 	}
+	/**
+	 * Rückgabe der Punkte des Ziegels.
+	 * 
+	 * @return brickPoints Punkte für den Ziegel +10 für einen Treffer
+	 */
 	@Override
 	public int getPoints() {
 		return (brickPoints+10); //+10 Punkte für einen Treffer
 	}
+	/**
+	 * Rückgabe des Namens der Spielfigur.
+	 * 
+	 * @return String "Special Brick"
+	 */
 	public String getName() {
 		return "Special Brick";
 	}

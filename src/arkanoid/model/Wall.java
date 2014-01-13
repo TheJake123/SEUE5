@@ -1,9 +1,23 @@
 package arkanoid.model;
-
+/**
+ * Die Klasse Wall repräsentiert die Außengrenzen (Wand) eines Spielfeldes.
+ */
 class Wall extends GameObject {
 	private final int[][] possibleReflections;
 	java.util.Random Random = new java.util.Random();
 	private Player player;
+	/**
+	 * Wall-Konstruktor, erstellt den Spielfeldrand und setzt die möglichen Abprallrichtungen des Balles.
+	 * 
+	 * @param x
+	 *            x-Position der Wand.
+	 * @param y
+	 *            y-Position der Wand.
+	 * @param level
+	 *            Aktuelle Level des Spiels
+	 * @param player
+	 *            Aktueller Spieler
+	 */
 	public Wall(int x, int y, Level level, Player player) {
 		super(x, y, level);
 		this.player = player;
@@ -59,7 +73,13 @@ class Wall extends GameObject {
 			possibleReflections[2][1] = -1;
 		}
 	} // end Wall
-
+	
+	/**
+	 * Visitor Implementierung, welche eine Richtungsänderung des Balles/Schlägers durchführt und bei Berührung
+	 * eines Balles mit der unteren Wand ein Leben abzieht.
+	 * 
+	 * @param other Spielobjekt das den Ziegel besucht.
+	 */
 	@Override
 	public void visit(GameObject other) {
 		if (other instanceof Ball) {
@@ -77,10 +97,20 @@ class Wall extends GameObject {
 			other.setPosX(getPosX()+possibleReflections[0][0]);
 		}
 	}
-
+	
+	/**
+	 * Visitor Implementierung, welches den Besuch ein Visitor Objektes akzeptiert.
+	 * 
+	 * @param v Visitor Objekt
+	 */
 	public void accept(Visitor visitor) {
 		visitor.visit(this);
 	}
+	/**
+	 * Rückgabe des Namens der Spielfigur.
+	 * 
+	 * @return String "Wand"
+	 */
 	public String getName() {
 		return "Wand";
 	}

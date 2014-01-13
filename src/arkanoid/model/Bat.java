@@ -17,6 +17,8 @@ public class Bat extends GameObject implements Moveable {
 	 *            y-Position des Schlägers
 	 * @param speedX
 	 *            Horizontale Bewegungsrichtung des Schlägers
+	 * @param level
+	 *            Aktuelle Level des Spiels
 	 * 
 	 */
 	public Bat(int x, int y, int speedX, Level level) {
@@ -100,13 +102,19 @@ public class Bat extends GameObject implements Moveable {
 				+ getPosY() + ") nach (" + getPosX() + "," + getPosY() + ")");
 
 	} // end move
-
+	/**
+	 * Rückgabe des Namens der Spielfigur.
+	 * 
+	 * @return String "Schläger"
+	 */
 	public String getName() {
 		return "Schläger";
 	}
 	/**
 	 * Visitor Implementierung, welche eine Richtungsänderung des Balles und die
 	 * Anzahl der Ballberürhrungen erhöht.
+	 * 
+	 * @param other Spielobjekt mit dem der Schläger kollidiert
 	 */
 	@Override
 	public void visit(GameObject other) {

@@ -13,7 +13,7 @@ public class BrickFactory {
 	 * 
 	 * @param brickType Name des zu erstellenden Ziegels.
 	 * @param x X-Position des Ziegels.
-	 * @param y Y-Position des Ziegels.
+	 * @param y Y-Position des Ziegels. 
 	 * 
 	 * @return ZiegelObjekt
 	 */

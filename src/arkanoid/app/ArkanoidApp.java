@@ -1,15 +1,23 @@
 package arkanoid.app;
 
 import java.util.ArrayList;
+
 import java.util.Random;
 
 import arkanoid.model.*;
-
+/**
+ * Diese Klasse startet das Spiel und erstellt ein Spielfeld
+ */
 public class ArkanoidApp {
 	private final Game game;
 	private final Thread gameThread;
 	Player player;
 
+	/**
+	 * Der ArkanoidApp Konstruktor startet ein Spiel, setzt das Level und Spielfeld und alle nötigen Parameter.
+	 * 
+	 * @param playerName Name des Spielers
+	 */
 	public ArkanoidApp(String playerName) {
 		player = new Player(playerName);
 		ArrayList<Level> levels = new ArrayList<Level>();
@@ -25,7 +33,12 @@ public class ArkanoidApp {
 		System.out.println("Spiel gestartet.");
 		new ArkanoidApp("Slider");
 	} // end main
-
+	/**
+	 * Die Methode erzeugt das Spielfeld mit den verschiedenen Ziegeln.
+	 * 
+	 * @param width Breite des Spielfeldes
+	 * @param height Höhe des Spielfeldes
+	 */
 	private GameObject[][] createField(int width, int height) {
 		GameObject field[][] = new GameObject[width][height];
 
