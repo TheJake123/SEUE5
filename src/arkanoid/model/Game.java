@@ -8,9 +8,9 @@ import java.util.Iterator;
  * Levels und den aktuellen Spieler.
  */
 public class Game implements Runnable {
-	Level currentLevel;
-	Iterator<Level> levelIterator;
-	Player player;
+	private Level currentLevel;
+	private Iterator<Level> levelIterator;
+	private Player player;
 	private ArrayList<Level> levels;
 
 	/**

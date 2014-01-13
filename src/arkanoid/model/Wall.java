@@ -4,7 +4,6 @@ package arkanoid.model;
  * Die Klasse Wall repr‰sentiert die Auﬂengrenzen (Wand) eines Spielfeldes.
  */
 class Wall extends GameObject {
-	java.util.Random Random = new java.util.Random();
 	private Player player;
 	private final int[][] possibleReflections;
 
