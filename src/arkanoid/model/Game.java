@@ -2,16 +2,17 @@ package arkanoid.model;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Random;
+
 /**
- * Die Klasse Game repräsentiert das Spiel und beherbergt u.a die verschiedenen Levels
- * und den aktuellen Spieler.
+ * Die Klasse Game repräsentiert das Spiel und beherbergt u.a die verschiedenen
+ * Levels und den aktuellen Spieler.
  */
 public class Game implements Runnable {
-	private ArrayList<Level> levels;
-	Iterator<Level> levelIterator;
 	Level currentLevel;
+	Iterator<Level> levelIterator;
 	Player player;
+	private ArrayList<Level> levels;
+
 	/**
 	 * Game-Konstruktor
 	 * 
@@ -28,8 +29,9 @@ public class Game implements Runnable {
 	} // end Gameboard
 
 	/**
-	 * Die Methode setzt die Spielparameter und gibt dem Spieler den Highscore aus.
-	 *
+	 * Die Methode setzt die Spielparameter und gibt dem Spieler den Highscore
+	 * aus.
+	 * 
 	 */
 	@Override
 	public void run() {

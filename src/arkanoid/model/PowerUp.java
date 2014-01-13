@@ -4,9 +4,9 @@ package arkanoid.model;
  * Die Klasse PowerUp ist die abstrakte Superklasse für ein spezielles PowerUp.
  */
 public abstract class PowerUp extends GameObject implements Moveable {
-	private int speedY;
 	private Player player;
-	
+	private int speedY;
+
 	/**
 	 * SingleBrick-Konstruktor
 	 * 
@@ -27,28 +27,7 @@ public abstract class PowerUp extends GameObject implements Moveable {
 		this.speedY = speedY;
 		this.player = player;
 	}
-	/**
-	 * Visitor Implementierung, welche das Spielobjekt löscht und bei Berührung mit dem Schläger die Punktezahl
-	 * erhöht.
-	 */
-	@Override
-	public void visit(GameObject other) {
-		if (other instanceof Wall) {
-			getLevel().removeObject(this);
-		} else if (other instanceof Bat) {
-			player.setScore(player.getScore() + 15);
-			System.out.println("Score wird um 15 auf " + player.getScore()
-					+ " erhöht");
-			//Löschung des Objektes?
-		}
-	}
-	/**
-	 * Die Methode führt die Richtungsänderung des PowerUp's in vertikaler Ebene durch.
-	 */
-	@Override
-	public void move() {
-		setPosY(getPosY() + getSpeedY());
-	}
+
 	/**
 	 * Die Methode gibt die aktuelle Geschwindigkeit in horizontaler Richtung
 	 * zurück.
@@ -56,10 +35,12 @@ public abstract class PowerUp extends GameObject implements Moveable {
 	 * @return 0 Keine horizontale Richtungsänderung vorgesehen.
 	 * @deprecated
 	 */
+	@Deprecated
 	@Override
 	final public int getSpeedX() {
 		return 0; // Keine horizontale Bewegung
 	}
+
 	/**
 	 * Die Methode gibt die aktuelle Geschwindigkeit in vertikaler Richtung
 	 * zurück.
@@ -70,6 +51,16 @@ public abstract class PowerUp extends GameObject implements Moveable {
 	public int getSpeedY() {
 		return speedY;
 	}
+
+	/**
+	 * Die Methode führt die Richtungsänderung des PowerUp's in vertikaler Ebene
+	 * durch.
+	 */
+	@Override
+	public void move() {
+		setPosY(getPosY() + getSpeedY());
+	}
+
 	/**
 	 * Die Methode setzt die aktuelle Geschwindigkeit in horizontaler Richtung.
 	 * 
@@ -77,9 +68,11 @@ public abstract class PowerUp extends GameObject implements Moveable {
 	 *            Aktuelle Geschwindigkeit in horizontaler Richtung.
 	 * @deprecated Keine horizontale Geschwindigkeitsänderung.
 	 */
+	@Deprecated
 	@Override
 	final public void setSpeedX(int speedX) {
 	}
+
 	/**
 	 * Die Methode setzt die aktuelle Geschwindigkeit in vertikaler Richtung.
 	 * 
@@ -89,6 +82,22 @@ public abstract class PowerUp extends GameObject implements Moveable {
 	@Override
 	public void setSpeedY(int speedY) {
 		this.speedY = speedY;
+	}
+
+	/**
+	 * Visitor Implementierung, welche das Spielobjekt löscht und bei Berührung
+	 * mit dem Schläger die Punktezahl erhöht.
+	 */
+	@Override
+	public void visit(GameObject other) {
+		if (other instanceof Wall) {
+			getLevel().removeObject(this);
+		} else if (other instanceof Bat) {
+			player.setScore(player.getScore() + 15);
+			System.out.println("Score wird um 15 auf " + player.getScore()
+					+ " erhöht");
+			// Löschung des Objektes?
+		}
 	}
 
 }

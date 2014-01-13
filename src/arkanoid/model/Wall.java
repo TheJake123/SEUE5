@@ -1,13 +1,16 @@
 package arkanoid.model;
+
 /**
  * Die Klasse Wall repräsentiert die Außengrenzen (Wand) eines Spielfeldes.
  */
 class Wall extends GameObject {
-	private final int[][] possibleReflections;
 	java.util.Random Random = new java.util.Random();
 	private Player player;
+	private final int[][] possibleReflections;
+
 	/**
-	 * Wall-Konstruktor, erstellt den Spielfeldrand und setzt die möglichen Abprallrichtungen des Balles.
+	 * Wall-Konstruktor, erstellt den Spielfeldrand und setzt die möglichen
+	 * Abprallrichtungen des Balles.
 	 * 
 	 * @param x
 	 *            x-Position der Wand.
@@ -23,23 +26,23 @@ class Wall extends GameObject {
 		this.player = player;
 		int boardWidth = level.getWidth();
 		int boardHeight = level.getHeight();
-		if (x == boardWidth - 1 && y == boardHeight - 1) { //SE Corner
+		if (x == boardWidth - 1 && y == boardHeight - 1) { // SE Corner
 			possibleReflections = new int[1][2];
 			possibleReflections[0][0] = -1;
 			possibleReflections[0][1] = -1;
-		} else if (x == boardWidth - 1 && y == 0) { //NE Corner
+		} else if (x == boardWidth - 1 && y == 0) { // NE Corner
 			possibleReflections = new int[1][2];
 			possibleReflections[0][0] = -1;
 			possibleReflections[0][1] = 1;
-		} else if (x == 0 && y == boardHeight - 1) { //SW Corner
+		} else if (x == 0 && y == boardHeight - 1) { // SW Corner
 			possibleReflections = new int[1][2];
 			possibleReflections[0][0] = 1;
 			possibleReflections[0][1] = -1;
-		} else if (x == 0 && y == 0) { //NW Corner
+		} else if (x == 0 && y == 0) { // NW Corner
 			possibleReflections = new int[1][2];
 			possibleReflections[0][0] = 1;
 			possibleReflections[0][1] = 1;
-		} else if (x == 0) { //W Wall
+		} else if (x == 0) { // W Wall
 			possibleReflections = new int[3][2];
 			possibleReflections[0][0] = 1;
 			possibleReflections[0][1] = -1;
@@ -73,12 +76,36 @@ class Wall extends GameObject {
 			possibleReflections[2][1] = -1;
 		}
 	} // end Wall
-	
+
 	/**
-	 * Visitor Implementierung, welche eine Richtungsänderung des Balles/Schlägers durchführt und bei Berührung
-	 * eines Balles mit der unteren Wand ein Leben abzieht.
+	 * Visitor Implementierung, welches den Besuch ein Visitor Objektes
+	 * akzeptiert.
 	 * 
-	 * @param other Spielobjekt das den Ziegel besucht.
+	 * @param visitor
+	 *            Visitor Objekt
+	 */
+	@Override
+	public void accept(Visitor visitor) {
+		visitor.visit(this);
+	}
+
+	/**
+	 * Rückgabe des Namens der Spielfigur.
+	 * 
+	 * @return String "Wand"
+	 */
+	@Override
+	public String getName() {
+		return "Wand";
+	}
+
+	/**
+	 * Visitor Implementierung, welche eine Richtungsänderung des
+	 * Balles/Schlägers durchführt und bei Berührung eines Balles mit der
+	 * unteren Wand ein Leben abzieht.
+	 * 
+	 * @param other
+	 *            Spielobjekt das den Ziegel besucht.
 	 */
 	@Override
 	public void visit(GameObject other) {
@@ -89,29 +116,14 @@ class Wall extends GameObject {
 			b.setSpeedY(possibleReflections[index][1]);
 			b.setPosX(getPosX() + possibleReflections[index][0]);
 			b.setPosY(getPosY() + possibleReflections[index][1]);
-			if (getPosY() == getLevel().getHeight()-1) {
-				player.setLives(player.getLives()-1);
-				System.out.println("Ball berührt unteren Spielfeldrand, es wird ein Leben abgezogen. Neue Leben: " + player.getLives());
+			if (getPosY() == getLevel().getHeight() - 1) {
+				player.setLives(player.getLives() - 1);
+				System.out
+						.println("Ball berührt unteren Spielfeldrand, es wird ein Leben abgezogen. Neue Leben: "
+								+ player.getLives());
 			}
 		} else if (other instanceof Bat) {
-			other.setPosX(getPosX()+possibleReflections[0][0]);
+			other.setPosX(getPosX() + possibleReflections[0][0]);
 		}
-	}
-	
-	/**
-	 * Visitor Implementierung, welches den Besuch ein Visitor Objektes akzeptiert.
-	 * 
-	 * @param v Visitor Objekt
-	 */
-	public void accept(Visitor visitor) {
-		visitor.visit(this);
-	}
-	/**
-	 * Rückgabe des Namens der Spielfigur.
-	 * 
-	 * @return String "Wand"
-	 */
-	public String getName() {
-		return "Wand";
 	}
 } // end class Wall
