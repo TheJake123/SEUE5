@@ -17,12 +17,9 @@ public class PlayerTest {
 	
 	@Test
 	public void testName() {
-		assertTrue("Player name", "TestName" == player.getName());
+		assertEquals("TestName", player.getName());
 	}
 	
-	/*
-	 * Note: set*-Methoden sind nicht Verfügbar aufgrund der eingeschränkten Sichtbarkeit (protected).
-	 */
 	
 	@Test
 	public void testLives() {

@@ -26,36 +26,36 @@ public class BatTest {
 
 	@Test
 	public void testGetName() {
-		assertTrue("Schläger Name:", "Schläger".equals(bat.getName()));
+		assertEquals("Schläger",bat.getName());
 	}
 
 	@Test
 	public void testGetBallHits() {
 		bat.setBallHits(5);
-		assertTrue("Schläger Name:", bat.getBallHits() == 5);
+		assertTrue("Ballberührungen:", bat.getBallHits() == 5);
 	}
 
 	@Test
 	public void testGetSpeedY() {
-		assertTrue("Schläger Name:", bat.getSpeedY() == 0);
+		assertTrue("Y Geschwindigkeit:", bat.getSpeedY() == 0);
 	}
 
 	@Test
 	public void testGetSpeedX() {
 		bat.setSpeedX(1);
-		assertTrue("Schläger Name:", bat.getSpeedX() == 1);
+		assertTrue("X Geschwindigkeit", bat.getSpeedX() == 1);
 	}
 	
 	@Test
 	public void testGetPosY() {
 		bat.setPosY(6);
-		assertTrue("Schläger Name:", bat.getPosY() == 6);
+		assertTrue("Y Position:", bat.getPosY() == 6);
 	}
 
 	@Test
 	public void testGetPosX() {
 		bat.setPosX(6);
-		assertTrue("Schläger Name:", bat.getPosX() == 6);
+		assertTrue("X Position:", bat.getPosX() == 6);
 	}
 
 	@Test
@@ -98,7 +98,7 @@ public class BatTest {
 		assertTrue("Neue X Geschwindigkeit:", bat.getSpeedX() == newXSpeed);	
 		assertTrue("Neue Y Geschwindigkeit:", bat.getSpeedY() == newYSpeed);
 		assertTrue("Neue Anzahl an Balltreffer:", bat.getBallHits() == newBallHits);
-		assertTrue("Neue X Geschwindigkeit:", (ball.getSpeedX()<=1 && ball.getSpeedX() >=-1));	
+		assertTrue("Neue X Geschwindigkeit des Balles:", (ball.getSpeedX()<=1 && ball.getSpeedX() >=-1));	
 		assertTrue("Neue Y Geschwindigkeit des Balles:", ball.getSpeedY() == newBallYSpeed);	
 
 	}

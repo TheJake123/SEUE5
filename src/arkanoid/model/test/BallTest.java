@@ -52,7 +52,7 @@ public class BallTest {
 	
 	@Test
 	public void testGetName() {
-		assertTrue("Ballname:", "Ball" == ball.getName());	
+		assertEquals("Ball", ball.getName());	
 	}
 	
 	@Test
