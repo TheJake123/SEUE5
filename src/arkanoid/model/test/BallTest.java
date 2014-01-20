@@ -29,25 +29,25 @@ public class BallTest {
 	@Test
 	public void testSpeedX() {
 		ball.setSpeedX(1);
-		assertTrue("Speed X:", 1 == ball.getSpeedX());
+		assertEquals("Speed X:", 1, ball.getSpeedX());
 	}
 	
 	@Test
 	public void testSpeedY() {
 		ball.setSpeedY(1);
-		assertTrue("Speed Y:", 1 == ball.getSpeedY());	
+		assertEquals("Speed Y:", 1, ball.getSpeedY());	
 	}
 	
 	@Test
 	public void testPosX() {
 		ball.setPosX(4);
-		assertTrue("Position X:", 4 == ball.getPosX());
+		assertEquals("Position X:", 4, ball.getPosX());
 	}
 	
 	@Test
 	public void testPosY() {
 		ball.setPosY(4);
-		assertTrue("Position Y:", 4 == ball.getPosY());	
+		assertEquals("Position Y:", 4, ball.getPosY());	
 	}
 	
 	@Test
@@ -62,8 +62,8 @@ public class BallTest {
 		
 		ball.move();
 
-		assertTrue("Neue X Position:", ball.getPosX() == newXPosition);	
-		assertTrue("Neue Y Position:", ball.getPosY() == newYPosition);	
+		assertEquals("Neue X Position:",newXPosition, ball.getPosX());	
+		assertEquals("Neue Y Position:",newYPosition, ball.getPosY());	
 	}
 	
 	@Test
@@ -78,17 +78,17 @@ public class BallTest {
 		
 		ball.visit(brick);
 
-		assertTrue("Neue X Position:", ball.getPosX() == newXPosition);	
-		assertTrue("Neue Y Position:", ball.getPosY() == newYPosition);	
-		assertTrue("Neue X Geschwindigkeit:", ball.getSpeedX() == newXSpeed);	
-		assertTrue("Neue Y Geschwindigkeit:", ball.getSpeedY() == newYSpeed);	
+		assertEquals("Neue X Position:", newXPosition, ball.getPosX());	
+		assertEquals("Neue Y Position:", newYPosition, ball.getPosY());	
+		assertEquals("Neue X Geschwindigkeit:", newXSpeed, ball.getSpeedX());	
+		assertEquals("Neue Y Geschwindigkeit:", newYSpeed, ball.getSpeedY());	
 		
 		ball.visit(wall); //Position darf sich nicht geändert haben
 		
-		assertTrue("Neue X Position:", ball.getPosX() == newXPosition);	
-		assertTrue("Neue Y Position:", ball.getPosY() == newYPosition);	
-		assertTrue("Neue X Geschwindigkeit:", ball.getSpeedX() == newXSpeed);	
-		assertTrue("Neue Y Geschwindigkeit:", ball.getSpeedY() == newYSpeed);	
+		assertEquals("Neue X Position:", newXPosition, ball.getPosX());	
+		assertEquals("Neue Y Position:", newYPosition, ball.getPosY());	
+		assertEquals("Neue X Geschwindigkeit:", newXSpeed, ball.getSpeedX());	
+		assertEquals("Neue Y Geschwindigkeit:", newYSpeed, ball.getSpeedY());	
 
 		
 	}

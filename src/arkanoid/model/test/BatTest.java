@@ -32,30 +32,30 @@ public class BatTest {
 	@Test
 	public void testGetBallHits() {
 		bat.setBallHits(5);
-		assertTrue("Ballberührungen:", bat.getBallHits() == 5);
+		assertEquals("Ballberührungen:", 5, bat.getBallHits());
 	}
 
 	@Test
 	public void testGetSpeedY() {
-		assertTrue("Y Geschwindigkeit:", bat.getSpeedY() == 0);
+		assertEquals("Y Geschwindigkeit:", 0, bat.getSpeedY());
 	}
 
 	@Test
 	public void testGetSpeedX() {
 		bat.setSpeedX(1);
-		assertTrue("X Geschwindigkeit", bat.getSpeedX() == 1);
+		assertEquals("X Geschwindigkeit", 1, bat.getSpeedX());
 	}
 	
 	@Test
 	public void testGetPosY() {
 		bat.setPosY(6);
-		assertTrue("Y Position:", bat.getPosY() == 6);
+		assertEquals("Y Position:",6, bat.getPosY());
 	}
 
 	@Test
 	public void testGetPosX() {
 		bat.setPosX(6);
-		assertTrue("X Position:", bat.getPosX() == 6);
+		assertEquals("X Position:",6, bat.getPosX());
 	}
 
 	@Test
@@ -66,8 +66,8 @@ public class BatTest {
 		
 		bat.move();
 		
-		assertTrue("Neue X Position:", newXPosition == bat.getPosX());
-		assertTrue("Neue Y Position:", 5 == bat.getPosY()); //Keine Richtungsänderung in Y Richtung vorgesehen
+		assertEquals("Neue X Position:", newXPosition,bat.getPosX());
+		assertEquals("Neue Y Position:", 5,bat.getPosY()); //Keine Richtungsänderung in Y Richtung vorgesehen
 	}
 
 	@Test
@@ -85,21 +85,21 @@ public class BatTest {
 		int newBallHits = bat.getBallHits()+1;
 		
 		bat.visit(wall); 
-		assertTrue("Neue X Position:", bat.getPosX() == newXPosition);	
-		assertTrue("Neue Y Position:", bat.getPosY() == newYPosition);	
-		assertTrue("Neue X Geschwindigkeit:", bat.getSpeedX() == newXSpeed);	
-		assertTrue("Neue Y Geschwindigkeit:", bat.getSpeedY() == newYSpeed);
+		assertEquals("Neue X Position:",newXPosition, bat.getPosX());	
+		assertEquals("Neue Y Position:",newYPosition, bat.getPosY());	
+		assertEquals("Neue X Geschwindigkeit:",newXSpeed, bat.getSpeedX());	
+		assertEquals("Neue Y Geschwindigkeit:",newYSpeed, bat.getSpeedY());
 		
 		//Sowohl Position als auch Geschwindikeit des Schlägers sollten sich nicht geändert haben, die des Balles jedoch schon		
 		bat.visit(ball);
 
-		assertTrue("Neue X Position:", bat.getPosX() == newXPosition);	
-		assertTrue("Neue Y Position:", bat.getPosY() == newYPosition);	
-		assertTrue("Neue X Geschwindigkeit:", bat.getSpeedX() == newXSpeed);	
-		assertTrue("Neue Y Geschwindigkeit:", bat.getSpeedY() == newYSpeed);
-		assertTrue("Neue Anzahl an Balltreffer:", bat.getBallHits() == newBallHits);
+		assertEquals("Neue X Position:",newXPosition, bat.getPosX());	
+		assertEquals("Neue Y Position:",newYPosition, bat.getPosY());	
+		assertEquals("Neue X Geschwindigkeit:",newXSpeed, bat.getSpeedX());	
+		assertEquals("Neue Y Geschwindigkeit:",newYSpeed, bat.getSpeedY());
+		assertEquals("Neue Anzahl an Balltreffer:",newBallHits, bat.getBallHits());
 		assertTrue("Neue X Geschwindigkeit des Balles:", (ball.getSpeedX()<=1 && ball.getSpeedX() >=-1));	
-		assertTrue("Neue Y Geschwindigkeit des Balles:", ball.getSpeedY() == newBallYSpeed);	
+		assertEquals("Neue Y Geschwindigkeit des Balles:",newBallYSpeed, ball.getSpeedY());	
 
 	}
 

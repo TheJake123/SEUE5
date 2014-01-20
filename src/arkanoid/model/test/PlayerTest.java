@@ -24,22 +24,22 @@ public class PlayerTest {
 	@Test
 	public void testLives() {
 		player.setLives(3);
-		assertTrue("Player - Leben:", 3 == player.getLives());
+		assertEquals("Player - Leben:", 3, player.getLives());
 	}
 	@Test
 	public void testScore() {
 		player.setScore(10);
-		assertTrue("Player - Score:", 10 == player.getScore());
+		assertEquals("Player - Score:", 10, player.getScore());
 	}
 	@Test
 	public void testHighscore() {
 		player.setHighScore(10);
-		assertTrue("Player - Highscore:", 10 == player.getHighScore());
+		assertEquals("Player - Highscore:", 10, player.getHighScore());
 	}
 	@Test
 	public void testLevels() {
 		player.setCurrentLevel(1);
-		assertTrue("Player - Aktuelles Level:", 1 == player.getCurrentLevel());
+		assertEquals("Player - Aktuelles Level:", 1, player.getCurrentLevel());
 	}
 
 }

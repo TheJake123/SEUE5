@@ -26,7 +26,7 @@ public class BrickFactoryTest {
 		assertTrue("Single Brick:", (factory.getBrick("SingleBRick", 10, 10) instanceof SingleBrick));
 		assertTrue("Triple Brick:", (factory.getBrick("MultiBRick", 10, 10) instanceof TripleBrick));
 		assertTrue("Special Brick:", (factory.getBrick("SpecialBRick", 10, 10) instanceof SpecialBrick));
-		assertTrue("No match:", (factory.getBrick("No Match", 10, 10) == null));
+		assertEquals("No match:", null, (factory.getBrick("No Match", 10, 10)));
 	}
 
 }
