@@ -1,23 +1,15 @@
 package arkanoid.model.test;
 
-
 import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import arkanoid.model.Ball;
-import arkanoid.model.Bat;
-import arkanoid.model.BatSpeedPowerUp;
-import arkanoid.model.GameObject;
-import arkanoid.model.Level;
-import arkanoid.model.Player;
-import arkanoid.model.Visitor;
-import arkanoid.model.Wall;
+import arkanoid.model.*;
 
 /**
- * class for testing the BatSpeedPowerUp
+ * Klasse, um das Powerup für den Schläger zu testen
  */
 public class BatSpeedPowerUpTest
 {
@@ -25,7 +17,7 @@ public class BatSpeedPowerUpTest
 	private Player player;
 	
 	/**
-	 * things to do BEFORE the test
+	 * Dinge, die vor jedem Test passieren
 	 */
 	@Before
 	public void setUp()
@@ -35,7 +27,7 @@ public class BatSpeedPowerUpTest
 	}
 	
 	/**
-	 * things to do AFTER the test
+	 * Dinge, die nach jedem Test passieren
 	 */
 	@After
 	public void tearDown()
@@ -44,7 +36,7 @@ public class BatSpeedPowerUpTest
 	}
 	
 	/**
-	 * testing the getSpeedY() method
+	 * Testen der getSpeedY() Methode
 	 */
 	@Test
 	public void getSpeedY()
@@ -53,7 +45,7 @@ public class BatSpeedPowerUpTest
 	}
 	
 	/**
-	 * testing the setSpeedY() method
+	 * Testen der setSpeedY() Methode
 	 */
 	@Test
 	public void setSpeedY()
@@ -63,7 +55,7 @@ public class BatSpeedPowerUpTest
 	}
 	
 	/**
-	 * testing the move() method
+	 * Testen der move() Methode
 	 */
 	@Test
 	public void move()
@@ -76,7 +68,7 @@ public class BatSpeedPowerUpTest
 	}
 	
 	/**
-	 * testing the getName() method
+	 * Testen der getName() Methode
 	 */
 	@Test
 	public void getName()
@@ -85,7 +77,7 @@ public class BatSpeedPowerUpTest
 	}
 	
 	/**
-	 * testing the getPosX() method
+	 * Testen der getPosX() Methode
 	 */
 	@Test
 	public void getPosX()
@@ -94,7 +86,7 @@ public class BatSpeedPowerUpTest
 	}
 	
 	/**
-	 * testing the getPosY() method
+	 * Testen der getPosY() Methode
 	 */
 	@Test
 	public void getPosY()
@@ -103,7 +95,7 @@ public class BatSpeedPowerUpTest
 	}
 	
 	/**
-	 * testing the setPosX() method
+	 * Testen der setPosX() Methode
 	 */
 	@Test
 	public void setPosX()
@@ -113,7 +105,7 @@ public class BatSpeedPowerUpTest
 	}
 	
 	/**
-	 * testing the setPosY() method
+	 * Testen der setPosY() Methode
 	 */
 	@Test
 	public void setPosY()
@@ -123,7 +115,7 @@ public class BatSpeedPowerUpTest
 	}
 	
 	/**
-	 * testing the getLevel() method
+	 * Testen der getLevel() Methode
 	 */
 	@Test
 	public void getLevel()
@@ -132,7 +124,7 @@ public class BatSpeedPowerUpTest
 	}
 	
 	/**
-	 * testing the setLevel() method
+	 * Testen der setLevel() Methode
 	 */
 	@Test
 	public void setLevel()
@@ -145,7 +137,7 @@ public class BatSpeedPowerUpTest
 	}
 	
 	/**
-	 * testing the accept() method
+	 * Testen der accept() Methode
 	 */
 	@Test
 	public void accept()
@@ -155,7 +147,6 @@ public class BatSpeedPowerUpTest
 		Visitor bat = new Bat(42,2,1, null);
 		Visitor wall = new Wall(42,1, level, null);
 		Visitor ball = new Ball(131, 455, 1, 1, null);
-		boolean failed = false;
 		
 		try
 		{
@@ -164,9 +155,7 @@ public class BatSpeedPowerUpTest
 		catch(Exception e)
 		{
 			fail("No Exception must be thrown here!");
-			failed = true;
 		}
-		assertFalse(failed);
 		
 		try
 		{
@@ -175,9 +164,7 @@ public class BatSpeedPowerUpTest
 		catch(Exception e)
 		{
 			fail("No Exception must be thrown here!");
-			failed = true;
 		}
-		assertFalse(failed);
 		
 		try
 		{
@@ -186,13 +173,11 @@ public class BatSpeedPowerUpTest
 		catch(Exception e)
 		{
 			fail("No Exception must be thrown here!");
-			failed = true;
 		}
-		assertFalse(failed);
 	}
 
 	/**
-	 * testing the visit() method
+	 * Testen der visit() Methode
 	 */
 	@Test
 	public void visit()
@@ -203,7 +188,6 @@ public class BatSpeedPowerUpTest
 		Bat bat = new Bat(42, 2, 1, null);
 		Wall wall = new Wall(42, 1, level, null);
 		Ball ball = new Ball(131, 455, 1 ,1, null);
-		boolean failed = false;
 		
 		try
 		{
@@ -212,9 +196,8 @@ public class BatSpeedPowerUpTest
 		catch(Exception e)
 		{
 			fail("No Exception must be thrown here!");
-			failed = true;
 		}
-		assertFalse(failed);
+		
 		assertEquals(0, player.getScore());
 		
 		try
@@ -224,9 +207,8 @@ public class BatSpeedPowerUpTest
 		catch(Exception e)
 		{
 			fail("No Exception must be thrown here!");
-			failed = true;
 		}
-		assertFalse(failed);
+
 		assertEquals(15, player.getScore());
 		
 		try
@@ -236,9 +218,33 @@ public class BatSpeedPowerUpTest
 		catch(Exception e)
 		{
 			fail("No Exception must be thrown here!");
-			failed = true;
 		}
-		assertFalse(failed);
+		
 		assertEquals(15, player.getScore());
+	}
+	
+	/**
+	 * Testen, ob das Powerup nach 15 Sekunden seine Wirkung verliert
+	 */
+	@Test
+	public void powerupExpiration()
+	{
+		GameObject[][] gameboard = new GameObject[100][100];
+		Level level = new Level(4, gameboard, null);
+		powerup.setLevel(level);
+		Bat bat = new Bat(42, 2, 1, null);
+		
+		assertEquals(1, bat.getSpeedX());
+		
+		powerup.visit(bat);
+		
+		try {
+			Thread.sleep(16000); // 1 sekunde mehr als Powerup läuft
+			
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		assertEquals(1, bat.getSpeedX());
 	}
 }

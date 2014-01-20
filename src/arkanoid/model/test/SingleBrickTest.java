@@ -1,21 +1,15 @@
 package arkanoid.model.test;
 
-
 import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import arkanoid.model.Ball;
-import arkanoid.model.GameObject;
-import arkanoid.model.Level;
-import arkanoid.model.Player;
-import arkanoid.model.SingleBrick;
-import arkanoid.model.Visitor;
+import arkanoid.model.*;
 
 /**
- * class for testing the SingleBrick
+ * Klasse, um den SingleBrick zu testen
  */
 public class SingleBrickTest	
 {
@@ -23,7 +17,7 @@ public class SingleBrickTest
 	private Player player;
 
 	/**
-	 * things to do BEFORE the test
+	 * Dinge, die vor jedem Test passieren
 	 */
 	@Before
 	public void setUp()
@@ -33,7 +27,7 @@ public class SingleBrickTest
 	}
 	
 	/**
-	 * things to do AFTER the test
+	 * Dinge, die nach jedem Test passieren
 	 */
 	@After
 	public void tearDown()
@@ -42,7 +36,7 @@ public class SingleBrickTest
 	}
 	
 	/**
-	 * testing the getName() method
+	 * Testen der getName() Methode
 	 */
 	@Test
 	public void getName()
@@ -51,7 +45,7 @@ public class SingleBrickTest
 	}
 	
 	/**
-	 * testing the getPoints() method
+	 * Testen der getPoints() Methode
 	 */
 	@Test
 	public void getPoints()
@@ -60,7 +54,7 @@ public class SingleBrickTest
 	}
 	
 	/**
-	 * testing the getPosX() method
+	 * Testen der getPosX() Methode
 	 */
 	@Test
 	public void getPosX()
@@ -69,7 +63,7 @@ public class SingleBrickTest
 	}
 	
 	/**
-	 * testing the getPosY() method
+	 * Testen der getPosY() Methode
 	 */
 	@Test
 	public void getPosY()
@@ -78,7 +72,7 @@ public class SingleBrickTest
 	}
 	
 	/**
-	 * testing the setPosX() method
+	 * Testen der setPosX() Methode
 	 */
 	@Test
 	public void setPosX()
@@ -88,7 +82,7 @@ public class SingleBrickTest
 	}
 	
 	/**
-	 * testing the setPosY() method
+	 * Testen der setPosY() Methode
 	 */
 	@Test
 	public void setPosY()
@@ -98,7 +92,7 @@ public class SingleBrickTest
 	}
 
 	/**
-	 * testing the getLevel() method
+	 * Testen der getLevel() Methode
 	 */
 	@Test
 	public void getLevel()
@@ -107,7 +101,7 @@ public class SingleBrickTest
 	}
 	
 	/**
-	 * testing the setLevel() method
+	 * Testen der setLevel() Methode
 	 */
 	@Test
 	public void setLevel()
@@ -120,13 +114,12 @@ public class SingleBrickTest
 	}
 	
 	/**
-	 * testing the accept() method
+	 * Testen der accept() Methode
 	 */
 	@Test
 	public void accept()
 	{
 		Visitor v = new Ball(9, 7, 1, 1, null);
-		boolean failed = false;
 		
 		try
 		{
@@ -135,14 +128,11 @@ public class SingleBrickTest
 		catch(Exception e)
 		{
 			fail("No Exception must be thrown here!");
-			failed = true;
 		}
-		
-		assertFalse(failed);
 	}
 	
 	/**
-	 * testing the visit() method
+	 * Testen der visit() Methode
 	 */
 	@Test
 	public void visit()
@@ -151,7 +141,6 @@ public class SingleBrickTest
 		Level level = new Level(1, gameboard, null);
 		brick.setLevel(level);
 		Ball ball = new Ball(9, 7, 1 ,1, null);
-		boolean failed = false;
 		
 		try
 		{
@@ -160,10 +149,8 @@ public class SingleBrickTest
 		catch(Exception e)
 		{
 			fail("No Exception must be thrown here!");
-			failed = true;
 		}
 		
-		assertFalse(failed);
 		assertEquals(30, player.getScore());
 	}
 }

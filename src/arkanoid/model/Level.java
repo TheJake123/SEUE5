@@ -140,7 +140,7 @@ public class Level {
 	 * @param o
 	 *            Spielobjekt das dem Level hinzugefügt werden soll.
 	 */
-	protected void addObject(GameObject o) {
+	public void addObject(GameObject o) {
 		int x = o.getPosX();
 		int y = o.getPosY();
 		if (gameboard[x][y] == null) {
@@ -169,7 +169,7 @@ public class Level {
 	 * 
 	 * @return Die Anzahl an verbleibenden Bricks
 	 */
-	protected int getBricksCount() {
+	public int getBricksCount() {
 		return bricksCount;
 	}
 
@@ -189,7 +189,7 @@ public class Level {
 	 * @param o
 	 *            Spielobjekt das aus dem Level gelöscht werden soll.
 	 */
-	protected void removeObject(GameObject o) {
+	public void removeObject(GameObject o) {
 		int x = o.getPosX();
 		int y = o.getPosY();
 		if (gameboard[x][y] == o) {

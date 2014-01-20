@@ -1,8 +1,6 @@
 package arkanoid.model.test;
 
-
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
@@ -11,15 +9,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import arkanoid.model.Ball;
-import arkanoid.model.GameObject;
-import arkanoid.model.Level;
-import arkanoid.model.Player;
-import arkanoid.model.TripleBrick;
-import arkanoid.model.Visitor;
+import arkanoid.model.*;
 
 /**
- * class for testing the TripleBrick
+ * Klasse, um den TripleBrick zu testen
  */
 public class TripleBrickTest
 {
@@ -27,7 +20,7 @@ public class TripleBrickTest
 	private Player player;
 	
 	/**
-	 * things to do BEFORE the test
+	 * Dinge, die vor jedem Test passieren
 	 */
 	@Before
 	public void setUp()
@@ -37,7 +30,7 @@ public class TripleBrickTest
 	}
 	
 	/**
-	 * things to do AFTER the test
+	 * Dinge, die nach jedem Test passieren
 	 */
 	@After
 	public void tearDown()
@@ -46,7 +39,7 @@ public class TripleBrickTest
 	}
 	
 	/**
-	 * testig the getName() method
+	 * Testen der getName() Methode
 	 */
 	@Test
 	public void getName()
@@ -55,7 +48,7 @@ public class TripleBrickTest
 	}
 	
 	/**
-	 * testing the getPoints() method
+	 * Testen der getPoints() Methode
 	 */
 	@Test
 	public void getPoints()
@@ -64,7 +57,7 @@ public class TripleBrickTest
 	}
 	
 	/**
-	 * testing the getPosX() method
+	 * Testen der getPosX() Methode
 	 */
 	@Test
 	public void getPosX()
@@ -73,7 +66,7 @@ public class TripleBrickTest
 	}
 	
 	/**
-	 * testing the getPosY() method
+	 * Testen der getPosY() Methode
 	 */
 	@Test
 	public void getPosY()
@@ -82,7 +75,7 @@ public class TripleBrickTest
 	}
 	
 	/**
-	 * testing the setPosX() method
+	 * Testen der setPosX() Methode
 	 */
 	@Test
 	public void setPosX()
@@ -92,7 +85,7 @@ public class TripleBrickTest
 	}
 	
 	/**
-	 * testing the setPosY() method
+	 * Testen der setPosY() Methode
 	 */
 	@Test
 	public void setPosY()
@@ -102,7 +95,7 @@ public class TripleBrickTest
 	}
 
 	/**
-	 * testing the getLevel() method
+	 * Testen der getLevel() Methode
 	 */
 	@Test
 	public void getLevel()
@@ -111,7 +104,7 @@ public class TripleBrickTest
 	}
 	
 	/**
-	 * testing the setLevel() method
+	 * Testen der setLevel() Methode
 	 */
 	@Test
 	public void setLevel()
@@ -124,13 +117,12 @@ public class TripleBrickTest
 	}
 	
 	/**
-	 * testing the accept() method
+	 * Testen der accept() Methode
 	 */
 	@Test
 	public void accept()
 	{
 		Visitor v = new Ball(98, 41, 1, 1, null);
-		boolean failed = false;
 		
 		try
 		{
@@ -139,14 +131,11 @@ public class TripleBrickTest
 		catch(Exception e)
 		{
 			fail("No Exception must be thrown here!");
-			failed = true;
 		}
-		
-		assertFalse(failed);
 	}
 	
 	/**
-	 * testing the visit() method
+	 * Testen der visit() Methode
 	 */
 	@Test
 	public void visit()
@@ -155,7 +144,6 @@ public class TripleBrickTest
 		Level level = new Level(2, gameboard, null);
 		brick.setLevel(level);
 		Ball ball = new Ball(98, 41, 1 ,1, null);
-		boolean failed = false;
 		
 		try
 		{
@@ -164,10 +152,8 @@ public class TripleBrickTest
 		catch(Exception e)
 		{
 			fail("No Exception must be thrown here!");
-			failed = true;
 		}
 		
-		assertFalse(failed);
 		assertEquals(10, player.getScore());
 		
 		try
@@ -177,9 +163,7 @@ public class TripleBrickTest
 		catch(Exception e)
 		{
 			fail("No Exception must be thrown here!");
-			failed = true;
 		}
-		assertFalse(failed);
 		assertEquals(20, player.getScore());
 		
 		try
@@ -189,9 +173,8 @@ public class TripleBrickTest
 		catch(Exception e)
 		{
 			fail("No Exception must be thrown here!");
-			failed = true;
 		}
-		assertFalse(failed);
+
 		assertEquals(30, player.getScore());
 		
 		try
@@ -201,9 +184,8 @@ public class TripleBrickTest
 		catch(Exception e)
 		{
 			fail("No Exception must be thrown here!");
-			failed = true;
 		}
-		assertFalse(failed);
+		
 		assertEquals(60, player.getScore());
 	}
 }
