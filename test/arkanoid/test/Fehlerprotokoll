@@ -1,0 +1,27 @@
+Übungsangabe:
+
+Testen Sie das in Übung 5 implementierte Programm, indem Sie Unit-Tests implementieren. 
+Dokumentieren  Sie  in  einem  Fehlerprotokoll,  welche  Unzulänglichkeiten  durch  die 
+Implementierung der Unit-Tests aufgetreten sind. 
+ 
+Für  den  Test  der  Klassenbibliothek  (Units)  müssen  Sie  Unit-Test-Werkzeuge  einsetzen  - 
+JUnit (für Java) oder NUnit (für C#). 
+ 
+Abgabe via Moodle als ein zip Archiv (Testtreiber, Testgegenstand, Fehlerprotokoll). Achten 
+Sie auf eine geeignete Dokumentation der Programmtexte (Testtreiber und Testgegenstand). 
+ 
+Wichtig:  Ziel  dieser  Übung  ist,  es  einige  Testaspekte  des  Entwicklungsprozesses 
+durchzuspielen. Nicht-Ziel ist es, alle entdeckten Fehler und Schwächen im Testgegenstand 
+zu  korrigieren,  um  z.B.  eine  100%ige  Testabdeckung  zu  erreichen  oder  alle  im 
+Fehlerprotokoll dokumentierten Fehler zu beheben. 
+
+------------------------------------------------------------------------------------------------------
+
+Fehlerprotokoll:
+setter in Player mussten auf visibility public gestellt werden.
+
+Wall ist nicht public, somit nicht testbar - musste geändert werden
+
+set*-Methoden sind nicht Verfügbar aufgrund der eingeschränkten Sichtbarkeit (protected).
+
+GameObject - set-/getLevel von protected auf public

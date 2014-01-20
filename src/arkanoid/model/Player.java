@@ -41,7 +41,7 @@ public class Player
 	 * 
 	 * @param newScore Aktuelle Wert des Spielstandes.
 	 */
-	protected void setScore(int newScore)
+	public void setScore(int newScore)
 	{
 		score = newScore;
 		
@@ -61,7 +61,7 @@ public class Player
 	 * 
 	 * @param newHighScore Höchster erreichter Wert des Spielers.
 	 */
-	protected void setHighScore(int newHighScore)
+	public void setHighScore(int newHighScore)
 	{
 		highScore = newHighScore;
 		
@@ -81,7 +81,7 @@ public class Player
 	 * 
 	 * @return lives Aktuell verbleibende Leben des Spielers.
 	 */
-	protected void setLives(int newLives)
+	public void setLives(int newLives)
 	{
 		lives = newLives;
 		
@@ -101,7 +101,7 @@ public class Player
 	 * 
 	 * param currLevel Die Nummer des aktuelle Levels
 	 */
-	protected void setCurrentLevel(int currLevel)
+	public void setCurrentLevel(int currLevel)
 	{
 		levelNo = currLevel;
 		

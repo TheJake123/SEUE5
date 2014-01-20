@@ -86,7 +86,7 @@ public abstract class GameObject implements Visitor, Visitable {
 	 * 
 	 * @param level Aktuelle Level.
 	 */
-	protected void setLevel(Level level) {
+	public void setLevel(Level level) {
 		this.level = level;
 	}
 	/**
@@ -94,7 +94,7 @@ public abstract class GameObject implements Visitor, Visitable {
 	 * 
 	 * @return level Aktuelle Level.
 	 */
-	protected Level getLevel() {
+	public Level getLevel() {
 		return level;
 	}
 } // end class GameObject
