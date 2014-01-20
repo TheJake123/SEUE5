@@ -17,7 +17,7 @@ Fehlerprotokoll dokumentierten Fehler zu beheben.
 
 ------------------------------------------------------------------------------------------------------
 
-Fehlerprotokoll:
+Fehlerprotokoll/Änderungsprotkoll:
 setter in Player mussten auf visibility public gestellt werden.
 
 Wall ist nicht public, somit nicht testbar - musste geändert werden
@@ -25,3 +25,9 @@ Wall ist nicht public, somit nicht testbar - musste geändert werden
 set*-Methoden sind nicht Verfügbar aufgrund der eingeschränkten Sichtbarkeit (protected).
 
 GameObject - set-/getLevel von protected auf public
+
+Private static class BatSpeedThread extends Thread nicht testbar, da private. Genauso wie private static BatSpeedThread t;
+
+In den jeweiligen accept-Methoden wird nur überprüft, ob ein Fehler beim Aufrufen der (Folge-)Methoden auftritt oder nicht, da es kein sichtbares Ergebnis gibt, das in die jeweilige Testklassen-Zuständigkeit fällt. 
+
+Um alle Tests ausführen zu können, müssen sich die Testklassen jeweils im selben package wie die zu testenden Methoden befinden.
