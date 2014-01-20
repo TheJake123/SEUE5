@@ -1,4 +1,5 @@
 package arkanoid.model;
+
 /**
  * Das Interface für Objekte, die von einem Besucher besucht werden können.
  */

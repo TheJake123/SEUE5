@@ -11,7 +11,7 @@ import arkanoid.model.*;
 public class ArkanoidApp {
 	private final Game game;
 	private final Thread gameThread;
-	Player player;
+	private Player player;
 
 	/**
 	 * Der ArkanoidApp Konstruktor startet ein Spiel, setzt das Level und Spielfeld und alle nötigen Parameter.

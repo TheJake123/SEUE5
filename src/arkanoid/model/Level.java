@@ -8,56 +8,15 @@ import java.util.ArrayList;
  * 
  */
 public class Level {
-	private int lvlNr;
+	private Bat bat = null;
+	private int bricksCount;
 	private GameObject[][] gameboard;
+	private int height;
+	private int lvlNr;
 	private ArrayList<Moveable> moveables = new ArrayList<Moveable>();
 	private Player player;
-	private Bat bat = null;
-
-	private int height;
-	/**
-	 * Ermittelt, wie hoch das Spielfeld ist
-	 * 
-	 * @return height Höhe des Spielfeldes
-	 */
-	public int getHeight() {
-		return height;
-	}
-	/**
-	 * Ermittelt, wie breit das Spielfeld ist.
-	 * 
-	 * @return width Breite des Spielfeldes
-	 */
-	public int getWidth() {
-		return width;
-	}
-
+	private java.util.Random Random = new java.util.Random();
 	private int width;
-	java.util.Random Random = new java.util.Random();
-
-	/**
-	 * Die Anzahl an verbleibenden Bricks im Level
-	 */
-	private int bricksCount;
-
-	/**
-	 * Ermittelt, wie viele Bricks noch im Level sind
-	 * 
-	 * @return Die Anzahl an verbleibenden Bricks
-	 */
-	protected int getBricksCount() {
-		return bricksCount;
-	}
-
-	/**
-	 * Ermittelt, ob das Spiel noch läuft oder nicht, d.h. ob noch Bricks
-	 * bestehen und der Spieler noch Leben hat
-	 * 
-	 * @return <code>true</code>, wenn das Spiel vorbei ist
-	 */
-	protected boolean isOver() {
-		return bricksCount <= 0 || player.getLives() <= 0;
-	}
 
 	/**
 	 * Konstruktor für einen Level
@@ -65,7 +24,7 @@ public class Level {
 	 * @param nr
 	 *            Die Nummer des Levels
 	 * @param gameboard
-	 * 			  Das Feld mit den Spielobjekten
+	 *            Das Feld mit den Spielobjekten
 	 */
 	public Level(int nr, GameObject[][] gameboard, Player player) {
 		lvlNr = nr;
@@ -73,93 +32,6 @@ public class Level {
 		this.bricksCount = prepareGameboard(gameboard);
 	} // end Level
 
-	/**
-	 * Ermittelt die aktuelle Levelnummer
-	 * 
-	 * @return Die Levelnummer des Levels
-	 */
-	public int getLvlNr() {
-		return lvlNr;
-
-	} // end getLvlNr
-
-	/**
-	 * Interne Methode. Nimmt das Array and Bricks, fügt unten 10 und an den
-	 * anderen Seiten jeweils 1 Zeile an (um Platz zu schaffen für die noch
-	 * fehlenden Objekte), fügt den {@link Bat} und {@link Ball} ein und
-	 * platziert die Wände. Ebenfalls zählt es die Bricks zu Beginn.
-	 * 
-	 * @param board
-	 *            Das vorzubereitende Spielfeld
-	 * @return
-	 */
-	private int prepareGameboard(GameObject[][] board)
-			throws NullPointerException {
-		if (board == null) {
-			throw new NullPointerException("No board to prepare");
-		}
-		height = board[0].length + 11;
-		width = board.length + 2;
-		gameboard = new GameObject[width][height];
-
-		// Create Walls
-		// south-wall
-		for (int x = 0; x < width; x++)
-			gameboard[x][0] = new Wall(x, 0, this, player);
-
-		// north-wall
-		for (int x = 0; x < width; x++)
-			gameboard[x][height - 1] = new Wall(x, height - 1, this, player);
-
-		// east-wall
-		for (int y = 0; y < height; y++)
-			gameboard[0][y] = new Wall(0, y, this, player);
-
-		// west-wall
-		for (int y = 0; y < height; y++)
-			gameboard[width - 1][y] = new Wall(width - 1, y, this, player);
-		int count = 0;
-		for (int x = 0; x < board.length; x++) {
-			for (int y = 0; y < board[0].length; y++)
-				if (board[x][y] instanceof Brick) {
-					count++;
-					gameboard[x + 1][y + 1] = board[x][y];
-					board[x][y].setLevel(this);
-				}
-
-		}
-		addObject(new Bat(width / 2, height - 2, 1, this));
-		addObject(new Ball(width / 2, height - 3, Random.nextInt(3) - 1, -1,
-				this));
-		return count;
-	}
-
-	/**
-	 * Fügt dem Level ein neues Spielobjekt hinzu.
-	 * 
-	 * @param o Spielobjekt das dem Level hinzugefügt werden soll.
-	 */
-	protected void addObject(GameObject o) {
-		int x = o.getPosX();
-		int y = o.getPosY();
-		if (gameboard[x][y] == null) {
-			if (o instanceof Ball || o instanceof PowerUp) {
-			} else if (o instanceof Bat) {
-				if (bat != null) {
-					gameboard[bat.getPosX()][bat.getPosY()] = null;
-					bat.setLevel(null);
-				}
-				bat = (Bat) o;
-			} else {
-				return;
-			}
-			if (o instanceof Moveable)
-				moveables.add((Moveable) o);
-			gameboard[x][y] = o;
-			o.setLevel(this);
-		}
-	}
-	
 	/**
 	 * Schreibt das Spielfeld grafisch in die Konsole.
 	 * 
@@ -185,28 +57,37 @@ public class Level {
 	}
 
 	/**
-	 * Entfernt dem Level ein Spielobjekt.
+	 * Ermittelt, wie hoch das Spielfeld ist
 	 * 
-	 * @param o Spielobjekt das aus dem Level gelöscht werden soll.
+	 * @return height Höhe des Spielfeldes
 	 */
-	protected void removeObject(GameObject o) {
-		int x = o.getPosX();
-		int y = o.getPosY();
-		if (gameboard[x][y] == o) {
-			gameboard[x][y] = null;
-			o.setLevel(null);
-			if (o instanceof Moveable) {
-				moveables.remove(o);
-			}
-			if (o instanceof Brick) {
-				bricksCount--;
-			}
-		}
+	public int getHeight() {
+		return height;
 	}
 
 	/**
-	 * Die Methode simuliert einen nächsten Schritt innerhalb eines Spieles, wodurch alle bewegbaren Spielobjekte
-	 * die Position verändern und der Score gegebenfalls erhöht wird.
+	 * Ermittelt die aktuelle Levelnummer
+	 * 
+	 * @return Die Levelnummer des Levels
+	 */
+	public int getLvlNr() {
+		return lvlNr;
+
+	} // end getLvlNr
+
+	/**
+	 * Ermittelt, wie breit das Spielfeld ist.
+	 * 
+	 * @return width Breite des Spielfeldes
+	 */
+	public int getWidth() {
+		return width;
+	}
+
+	/**
+	 * Die Methode simuliert einen nächsten Schritt innerhalb eines Spieles,
+	 * wodurch alle bewegbaren Spielobjekte die Position verändern und der Score
+	 * gegebenfalls erhöht wird.
 	 */
 	public void step() {
 		if (player.getScore() > 0) {
@@ -251,5 +132,126 @@ public class Level {
 							+ player.getScore() + " erhöht");
 		}
 		// displayBoard();
+	}
+
+	/**
+	 * Fügt dem Level ein neues Spielobjekt hinzu.
+	 * 
+	 * @param o
+	 *            Spielobjekt das dem Level hinzugefügt werden soll.
+	 */
+	protected void addObject(GameObject o) {
+		int x = o.getPosX();
+		int y = o.getPosY();
+		if (gameboard[x][y] == null) {
+			if (o instanceof Ball || o instanceof PowerUp) {
+				System.out.println("Neues Objekt: " + o.getName()
+						+ " an Stelle (" + o.getPosX() + "," + o.getPosY()
+						+ ")");
+			} else if (o instanceof Bat) {
+				if (bat != null) {
+					gameboard[bat.getPosX()][bat.getPosY()] = null;
+					bat.setLevel(null);
+				}
+				bat = (Bat) o;
+			} else {
+				return;
+			}
+			if (o instanceof Moveable)
+				moveables.add((Moveable) o);
+			gameboard[x][y] = o;
+			o.setLevel(this);
+		}
+	}
+
+	/**
+	 * Ermittelt, wie viele Bricks noch im Level sind
+	 * 
+	 * @return Die Anzahl an verbleibenden Bricks
+	 */
+	protected int getBricksCount() {
+		return bricksCount;
+	}
+
+	/**
+	 * Ermittelt, ob das Spiel noch läuft oder nicht, d.h. ob noch Bricks
+	 * bestehen und der Spieler noch Leben hat
+	 * 
+	 * @return <code>true</code>, wenn das Spiel vorbei ist
+	 */
+	protected boolean isOver() {
+		return bricksCount <= 0 || player.getLives() <= 0;
+	}
+
+	/**
+	 * Entfernt dem Level ein Spielobjekt.
+	 * 
+	 * @param o
+	 *            Spielobjekt das aus dem Level gelöscht werden soll.
+	 */
+	protected void removeObject(GameObject o) {
+		int x = o.getPosX();
+		int y = o.getPosY();
+		if (gameboard[x][y] == o) {
+			gameboard[x][y] = null;
+			o.setLevel(null);
+			if (o instanceof Moveable) {
+				moveables.remove(o);
+			}
+			if (o instanceof Brick) {
+				bricksCount--;
+			}
+		}
+	}
+
+	/**
+	 * Interne Methode. Nimmt das Array and Bricks, fügt unten 10 und an den
+	 * anderen Seiten jeweils 1 Zeile an (um Platz zu schaffen für die noch
+	 * fehlenden Objekte), fügt den {@link Bat} und {@link Ball} ein und
+	 * platziert die Wände. Ebenfalls zählt es die Bricks zu Beginn.
+	 * 
+	 * @param board
+	 *            Das vorzubereitende Spielfeld
+	 * @return Die Anzahl an Bricks im Feld
+	 */
+	private int prepareGameboard(GameObject[][] board)
+			throws NullPointerException {
+		if (board == null) {
+			throw new NullPointerException("No board to prepare");
+		}
+		height = board[0].length + 11;
+		width = board.length + 2;
+		gameboard = new GameObject[width][height];
+
+		// Create Walls
+		// south-wall
+		for (int x = 0; x < width; x++)
+			gameboard[x][0] = new Wall(x, 0, this, player);
+
+		// north-wall
+		for (int x = 0; x < width; x++)
+			gameboard[x][height - 1] = new Wall(x, height - 1, this, player);
+
+		// east-wall
+		for (int y = 0; y < height; y++)
+			gameboard[0][y] = new Wall(0, y, this, player);
+
+		// west-wall
+		for (int y = 0; y < height; y++)
+			gameboard[width - 1][y] = new Wall(width - 1, y, this, player);
+		int count = 0;
+		for (int x = 0; x < board.length; x++) {
+			for (int y = 0; y < board[0].length; y++)
+				if (board[x][y] instanceof Brick) {
+					count++;
+					gameboard[x + 1][y + 1] = board[x][y];
+					board[x][y].setLevel(this);
+				}
+
+		}
+		addObject(new Bat(width / 2, height - 2, 1, this));
+		addObject(new Ball(width / 2, height - 3, Random.nextInt(3) - 1, -1,
+				this));
+		return count;
 	}
 } // end class Level

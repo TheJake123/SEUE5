@@ -1,11 +1,12 @@
 package arkanoid.model;
+
 /**
- * Die Klasse Brick ist die abstrakte Superklasse für einen Ziegel.
+ * Die Klasse Brick ist die abstrakte Superklasse fï¿½r einen Ziegel.
  */
 public abstract class Brick extends GameObject {
-	private Player player;
 	protected int brickPoints = 20;
-	
+	private Player player;
+
 	/**
 	 * Brick-Konstruktor
 	 * 
@@ -23,27 +24,29 @@ public abstract class Brick extends GameObject {
 		super(x, y, level);
 		this.player = player;
 	} // end Brick
-	
+
 	/**
-	 * Visitor Implementierung, welches bei einer Ballberührung den Spielstand aktualisiert.
+	 * Rï¿½ckgabe der Punkte des Ziegels.
 	 * 
-	 * @param other Spielobjekt das den Ziegel besucht.
+	 * @return brickPoints Punkte fï¿½r den Ziegel
+	 */
+	public int getPoints() {
+		return brickPoints;
+	}
+
+	/**
+	 * Visitor Implementierung, welches bei einer Ballberï¿½hrung den Spielstand
+	 * aktualisiert.
+	 * 
+	 * @param other
+	 *            Spielobjekt das den Ziegel besucht.
 	 */
 	@Override
 	public void visit(GameObject other) {
 		if (other instanceof Ball) {
 			player.setScore(player.getScore() + getPoints());
 			System.out.println("Score wird um " + getPoints() + " auf "
-					+ player.getScore() + " erhöht");
+					+ player.getScore() + " erhï¿½ht");
 		}
-	}
-
-	/**
-	 * Rückgabe der Punkte des Ziegels.
-	 * 
-	 * @return brickPoints Punkte für den Ziegel
-	 */
-	public int getPoints() {
-		return brickPoints;
 	}
 } // end class Brick

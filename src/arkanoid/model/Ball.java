@@ -30,6 +30,38 @@ public class Ball extends GameObject implements Moveable {
 	} // end Ball
 
 	/**
+	 * Rückgabe des Namens der Spielfigur.
+	 * 
+	 * @return String "Ball"
+	 */
+	@Override
+	public String getName() {
+		return "Ball";
+	}
+
+	/**
+	 * Die Methode gibt die aktuelle Geschwindigkeit in horizontaler Richtung
+	 * zurück.
+	 * 
+	 * @return speedX Aktuelle Geschwindigkeit in horizontaler Richtung.
+	 */
+	@Override
+	public int getSpeedX() {
+		return speedX;
+	}
+
+	/**
+	 * Die Methode gibt die aktuelle Geschwindigkeit in vertikaler Richtung
+	 * zurück.
+	 * 
+	 * @return speedY Aktuelle Geschwindigkeit in vertikaler Richtung.
+	 */
+	@Override
+	public int getSpeedY() {
+		return speedY;
+	}
+
+	/**
 	 * Die Methode führt die Richtungsänderung des Balles in horizontaler und
 	 * vertikaler Ebene durch.
 	 */
@@ -45,8 +77,10 @@ public class Ball extends GameObject implements Moveable {
 	/**
 	 * Die Methode setzt die aktuelle Geschwindigkeit in horizontaler Richtung.
 	 * 
-	 * @param speedX Aktuelle Geschwindigkeit in horizontaler Richtung.
+	 * @param speedX
+	 *            Aktuelle Geschwindigkeit in horizontaler Richtung.
 	 */
+	@Override
 	public void setSpeedX(int speedX) {
 		this.speedX = speedX;
 	}
@@ -54,37 +88,20 @@ public class Ball extends GameObject implements Moveable {
 	/**
 	 * Die Methode setzt die aktuelle Geschwindigkeit in vertikaler Richtung.
 	 * 
-	 * @param speedY Aktuelle Geschwindigkeit in vertikaler Richtung.
+	 * @param speedY
+	 *            Aktuelle Geschwindigkeit in vertikaler Richtung.
 	 */
+	@Override
 	public void setSpeedY(int speedY) {
 		this.speedY = speedY;
 	}
 
 	/**
-	 * Die Methode gibt die aktuelle Geschwindigkeit in vertikaler Richtung
-	 * zurück.
+	 * Visitor Implementierung, welche eine Richtungsänderung des Balles bewirkt
+	 * und die aktuelle Position neu setzt.
 	 * 
-	 * @return speedY Aktuelle Geschwindigkeit in vertikaler Richtung.
-	 */
-	public int getSpeedY() {
-		return speedY;
-	}
-
-	/**
-	 * Die Methode gibt die aktuelle Geschwindigkeit in horizontaler Richtung
-	 * zurück.
-	 * 
-	 * @return speedX Aktuelle Geschwindigkeit in horizontaler Richtung.
-	 */
-	public int getSpeedX() {
-		return speedX;
-	}
-
-	/**
-	 * Visitor Implementierung, welche eine Richtungsänderung des Balles bewirkt und die
-	 * aktuelle Position neu setzt.
-	 * 
-	 * @param other Spielobjekt mit dem der Ball kollidiert
+	 * @param other
+	 *            Spielobjekt mit dem der Ball kollidiert
 	 */
 	@Override
 	public void visit(GameObject other) {
@@ -94,15 +111,6 @@ public class Ball extends GameObject implements Moveable {
 			setSpeedX(getSpeedX() * -1);
 			setSpeedY(getSpeedY() * -1);
 		}
-	}
-	
-	/**
-	 * Rückgabe des Namens der Spielfigur.
-	 * 
-	 * @return String "Ball"
-	 */
-	public String getName() {
-		return "Ball";
 	}
 
 } // end class Ball

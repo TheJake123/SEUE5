@@ -1,14 +1,19 @@
 package arkanoid.model;
+
 /**
- * Die Klasse BatSpeedPowerUp repräsentiert im Spiel ein PowerUp, welches den Schläger für eine kurze Zeit
- * beschleunigt.
+ * Die Klasse BatSpeedPowerUp repräsentiert im Spiel ein PowerUp, welches den
+ * Schläger für eine kurze Zeit beschleunigt.
  */
 public class BatSpeedPowerUp extends PowerUp {
 	private static class BatSpeedThread extends Thread {
-		private boolean inEffect = false;
 		private Bat bat = null;
-		private int origSpeed = 1;
 		private int counter = -1;
+		private int origSpeed = 1;
+
+		public boolean hasBat() {
+			return bat != null;
+		}
+
 		@Override
 		public void run() {
 			while (!Thread.interrupted()) {
@@ -19,29 +24,31 @@ public class BatSpeedPowerUp extends PowerUp {
 					} else if (counter == 0) {
 						bat.setSpeedX(origSpeed);
 						counter--;
+						System.out
+								.println("Schlägerbeschleunigung deaktiviert");
 					}
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
 		}
-		public boolean hasBat() {
-			return bat != null;
-		}
+
 		public void setBat(Bat b) {
 			bat = b;
 			origSpeed = bat.getSpeedX();
 		}
 
 		public void startTimer() {
-			inEffect = true;
 			bat.setSpeedX(origSpeed * 3);
 			counter = 15;
 		}
 	};
+
 	private static BatSpeedThread t = new BatSpeedThread();
+
 	/**
-	 * BatSpeedPowerUp-Konstruktor, der für die Auswirkungen des PowerUp's einen Thread startet.
+	 * BatSpeedPowerUp-Konstruktor, der für die Auswirkungen des PowerUp's einen
+	 * Thread startet.
 	 * 
 	 * @param x
 	 *            x-Position des PowerUp's.
@@ -55,25 +62,10 @@ public class BatSpeedPowerUp extends PowerUp {
 	 */
 	public BatSpeedPowerUp(int x, int y, Level level, Player player) {
 		super(x, y, 1, level, player);
-		if (!t.isAlive()) 
+		if (!t.isAlive())
 			t.start();
 	}
-	
-	/**
-	 * Visitor Implementierung, welche bei einer Kollidierung mit dem Schläger die Auswirkungen für diesen
-	 * startet.
-	 * 
-	 * @param other Spielobjekt mit dem das PowerUp kollidiert
-	 */
-	public void visit(GameObject other) {
-		super.visit(other);
-		if (other instanceof Bat) {
-			if (!t.hasBat())
-				t.setBat((Bat)other);
-			t.startTimer();
-			getLevel().removeObject(this);
-		}
-	}
+
 	/**
 	 * Rückgabe des Namens der Spielfigur.
 	 * 
@@ -82,5 +74,24 @@ public class BatSpeedPowerUp extends PowerUp {
 	@Override
 	public String getName() {
 		return "BatSpeedPowerUp";
+	}
+
+	/**
+	 * Visitor Implementierung, welche bei einer Kollidierung mit dem Schläger
+	 * die Auswirkungen für diesen startet.
+	 * 
+	 * @param other
+	 *            Spielobjekt mit dem das PowerUp kollidiert
+	 */
+	@Override
+	public void visit(GameObject other) {
+		super.visit(other);
+		if (other instanceof Bat) {
+			if (!t.hasBat())
+				t.setBat((Bat) other);
+			t.startTimer();
+			System.out.println("Schlägerbeschleunigung aktiviert");
+			getLevel().removeObject(this);
+		}
 	}
 }

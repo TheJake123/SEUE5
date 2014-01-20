@@ -5,8 +5,8 @@ package arkanoid.model;
  * zwischen dem rechten und linken Spielfeldrand pendelt.
  */
 public class Bat extends GameObject implements Moveable {
-	private int speedX;
 	private int ballHits;
+	private int speedX;
 
 	/**
 	 * Bat-Konstruktor
@@ -39,25 +39,13 @@ public class Bat extends GameObject implements Moveable {
 	} // end getBallHits
 
 	/**
-	 * Setzt die Anzahl der Ballberühungen des Schlägers auf den aktuellen Wert.
+	 * Rückgabe des Namens der Spielfigur.
 	 * 
-	 * @param hits
-	 *            Aktuelle Ballberührungen.
+	 * @return String "Schläger"
 	 */
-	public void setBallHits(int hits) {
-		ballHits = hits;
-
-	} // end setBallHits
-
-	/**
-	 * Die Methode gibt die aktuelle Geschwindigkeit in vertikaler Richtung
-	 * zurück.
-	 * 
-	 * @return 0 Eine vertikale Richtungsänderung ist nicht vorgesehen.
-	 */
-	public int getSpeedY() {
-		return 0; // Rückgabewert ist 0 da keine vertikale Bewegungsrichtung des
-					// Schlägers vorgesehen ist
+	@Override
+	public String getName() {
+		return "Schläger";
 	}
 
 	/**
@@ -66,28 +54,21 @@ public class Bat extends GameObject implements Moveable {
 	 * 
 	 * @return speedX Aktuelle Geschwindigkeit in horizontaler Richtung.
 	 */
+	@Override
 	public int getSpeedX() {
 		return speedX;
 	}
 
 	/**
-	 * Die Methode setzt die aktuelle Geschwindigkeit in horizontaler Richtung.
+	 * Die Methode gibt die aktuelle Geschwindigkeit in vertikaler Richtung
+	 * zurück.
 	 * 
-	 * @param speedX
-	 *            Aktuelle Geschwindigkeit in horizontaler Richtung.
+	 * @return 0 Eine vertikale Richtungsänderung ist nicht vorgesehen.
 	 */
-	public void setSpeedX(int speedX) {
-		this.speedX = speedX;
-	}
-
-	/**
-	 * Die Methode setzt die aktuelle Geschwindigkeit in vertikaler Richtung.
-	 * 
-	 * @deprecated Wird nicht verwendet da keine vertikale Richtungsänderung
-	 *             vorgesehen ist
-	 */
-	public void setSpeedY(int speedY) {
-
+	@Override
+	public int getSpeedY() {
+		return 0; // Rückgabewert ist 0 da keine vertikale Bewegungsrichtung des
+					// Schlägers vorgesehen ist
 	}
 
 	/**
@@ -102,19 +83,47 @@ public class Bat extends GameObject implements Moveable {
 				+ getPosY() + ") nach (" + getPosX() + "," + getPosY() + ")");
 
 	} // end move
+
 	/**
-	 * Rückgabe des Namens der Spielfigur.
+	 * Setzt die Anzahl der Ballberühungen des Schlägers auf den aktuellen Wert.
 	 * 
-	 * @return String "Schläger"
+	 * @param hits
+	 *            Aktuelle Ballberührungen.
 	 */
-	public String getName() {
-		return "Schläger";
+	public void setBallHits(int hits) {
+		ballHits = hits;
+
+	} // end setBallHits
+
+	/**
+	 * Die Methode setzt die aktuelle Geschwindigkeit in horizontaler Richtung.
+	 * 
+	 * @param speedX
+	 *            Aktuelle Geschwindigkeit in horizontaler Richtung.
+	 */
+	@Override
+	public void setSpeedX(int speedX) {
+		this.speedX = speedX;
 	}
+
+	/**
+	 * Die Methode setzt die aktuelle Geschwindigkeit in vertikaler Richtung.
+	 * 
+	 * @deprecated Wird nicht verwendet da keine vertikale Richtungsänderung
+	 *             vorgesehen ist
+	 */
+	@Deprecated
+	@Override
+	public void setSpeedY(int speedY) {
+
+	}
+
 	/**
 	 * Visitor Implementierung, welche eine Richtungsänderung des Balles und die
 	 * Anzahl der Ballberürhrungen erhöht.
 	 * 
-	 * @param other Spielobjekt mit dem der Schläger kollidiert
+	 * @param other
+	 *            Spielobjekt mit dem der Schläger kollidiert
 	 */
 	@Override
 	public void visit(GameObject other) {

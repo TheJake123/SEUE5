@@ -18,6 +18,7 @@ Fehlerprotokoll dokumentierten Fehler zu beheben.
 ------------------------------------------------------------------------------------------------------
 
 Fehlerprotokoll/Änderungsprotkoll:
+
 setter in Player mussten auf visibility public gestellt werden.
 
 Wall ist nicht public, somit nicht testbar - musste geändert werden

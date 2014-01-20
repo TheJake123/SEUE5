@@ -21,18 +21,17 @@ public class SingleBrick extends Brick {
 	public SingleBrick(int x, int y, Player player, Level level) {
 		super(x, y, player, level);
 	}
+
 	/**
-	 * Visitor Implementierung, welche das Spielobjekt löscht.
+	 * Rückgabe des Namens der Spielfigur.
 	 * 
-	 * @param other Spielobjekt das den Ziegel besucht.
+	 * @return String "Single Brick"
 	 */
 	@Override
-	public void visit(GameObject other) {
-		super.visit(other);
-		if (other instanceof Ball) {
-			getLevel().removeObject(this);
-		}
+	public String getName() {
+		return "Single Brick";
 	}
+
 	/**
 	 * Rückgabe der Punkte des Ziegels.
 	 * 
@@ -42,12 +41,18 @@ public class SingleBrick extends Brick {
 	public int getPoints() {
 		return (brickPoints + 10); // +10 Punkte für einen Treffer
 	}
+
 	/**
-	 * Rückgabe des Namens der Spielfigur.
+	 * Visitor Implementierung, welche das Spielobjekt löscht.
 	 * 
-	 * @return String "Single Brick"
+	 * @param other
+	 *            Spielobjekt das den Ziegel besucht.
 	 */
-	public String getName() {
-		return "Single Brick";
+	@Override
+	public void visit(GameObject other) {
+		super.visit(other);
+		if (other instanceof Ball) {
+			getLevel().removeObject(this);
+		}
 	}
 }
