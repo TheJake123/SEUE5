@@ -1,4 +1,4 @@
-package arkanoid.test;
+package arkanoid.model.test;
 
 
 import static org.junit.Assert.assertEquals;

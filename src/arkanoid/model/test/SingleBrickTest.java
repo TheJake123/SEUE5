@@ -1,4 +1,4 @@
-package arkanoid.test;
+package arkanoid.model.test;
 
 
 import static org.junit.Assert.*;
@@ -8,19 +8,18 @@ import org.junit.Before;
 import org.junit.Test;
 
 import arkanoid.model.Ball;
-import arkanoid.model.BatSpeedPowerUp;
 import arkanoid.model.GameObject;
 import arkanoid.model.Level;
 import arkanoid.model.Player;
-import arkanoid.model.SpecialBrick;
+import arkanoid.model.SingleBrick;
 import arkanoid.model.Visitor;
 
 /**
- * class for testing the SpecialBrick
+ * class for testing the SingleBrick
  */
-public class SpecialBrickTest
+public class SingleBrickTest	
 {
-	private SpecialBrick brick;
+	private SingleBrick brick;
 	private Player player;
 
 	/**
@@ -29,8 +28,8 @@ public class SpecialBrickTest
 	@Before
 	public void setUp()
 	{
-		player = new Player("Tester3");
-		brick = new SpecialBrick(132, 456, player, null);
+		player = new Player("Tester1");
+		brick = new SingleBrick(10, 8, player, null);
 	}
 	
 	/**
@@ -48,7 +47,7 @@ public class SpecialBrickTest
 	@Test
 	public void getName()
 	{
-		assertEquals("Special Brick", brick.getName());
+		assertEquals("Single Brick", brick.getName());
 	}
 	
 	/**
@@ -66,7 +65,7 @@ public class SpecialBrickTest
 	@Test
 	public void getPosX()
 	{
-		assertEquals(132, brick.getPosX());
+		assertEquals(10, brick.getPosX());
 	}
 	
 	/**
@@ -75,7 +74,7 @@ public class SpecialBrickTest
 	@Test
 	public void getPosY()
 	{
-		assertEquals(456, brick.getPosY());
+		assertEquals(8, brick.getPosY());
 	}
 	
 	/**
@@ -84,8 +83,8 @@ public class SpecialBrickTest
 	@Test
 	public void setPosX()
 	{
-		brick.setPosX(33);
-		assertEquals(33, brick.getPosX());
+		brick.setPosX(22);
+		assertEquals(22, brick.getPosX());
 	}
 	
 	/**
@@ -94,24 +93,10 @@ public class SpecialBrickTest
 	@Test
 	public void setPosY()
 	{
-		brick.setPosY(44);
-		assertEquals(44, brick.getPosY());
+		brick.setPosY(28);
+		assertEquals(28, brick.getPosY());
 	}
 
-	/**
-	 * testing the getPowerUp() method
-	 */
-	@Test
-	public void getPowerUp()
-	{
-		boolean isBatSpeedPowerUp = false;
-		
-		if(brick.getPowerUp() instanceof BatSpeedPowerUp)
-			isBatSpeedPowerUp = true;
-		
-		assertTrue(isBatSpeedPowerUp);
-	}
-	
 	/**
 	 * testing the getLevel() method
 	 */
@@ -127,8 +112,8 @@ public class SpecialBrickTest
 	@Test
 	public void setLevel()
 	{
-		GameObject[][] gameboard = new GameObject[10][10];
-		Level level = new Level(3, gameboard, null);
+		GameObject[][] gameboard = new GameObject[40][40];
+		Level level = new Level(1, gameboard, null);
 		
 		brick.setLevel(level);
 		assertSame(level, brick.getLevel());
@@ -140,7 +125,7 @@ public class SpecialBrickTest
 	@Test
 	public void accept()
 	{
-		Visitor v = new Ball(131, 455, 1, 1, null);
+		Visitor v = new Ball(9, 7, 1, 1, null);
 		boolean failed = false;
 		
 		try
@@ -152,19 +137,20 @@ public class SpecialBrickTest
 			fail("No Exception must be thrown here!");
 			failed = true;
 		}
+		
 		assertFalse(failed);
 	}
-
+	
 	/**
 	 * testing the visit() method
 	 */
 	@Test
 	public void visit()
 	{
-		GameObject[][] gameboard = new GameObject[150][500];
-		Level level = new Level(3, gameboard, null);
+		GameObject[][] gameboard = new GameObject[40][40];
+		Level level = new Level(1, gameboard, null);
 		brick.setLevel(level);
-		Ball ball = new Ball(131, 455, 1 ,1, null);
+		Ball ball = new Ball(9, 7, 1 ,1, null);
 		boolean failed = false;
 		
 		try
@@ -176,6 +162,7 @@ public class SpecialBrickTest
 			fail("No Exception must be thrown here!");
 			failed = true;
 		}
+		
 		assertFalse(failed);
 		assertEquals(30, player.getScore());
 	}

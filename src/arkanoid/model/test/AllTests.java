@@ -1,8 +1,5 @@
-package arkanoid.test;
+package arkanoid.model.test;
 
-
-import arkanoid.app.*;
-import arkanoid.model.*;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
